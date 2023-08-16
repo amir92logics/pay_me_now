@@ -55,12 +55,17 @@
                                 @endif
                             </td>
                             <td>
+                              @if ($deposit->status == 2)
                                 @if ($deposit->status != 1)
                                 <a href="{{ route('admin.deposits.approved',  $deposit->id) }}" class="badge bg-info text-white"> <i data-feather='check-circle'></i> Approved</a>
                                 @endif
                                 @if ($deposit->status != 0)
                                 <a href="{{ route('admin.deposits.reject', $deposit->id) }}" class="badge bg-danger text-white"> <i data-feather='x-circle'></i> Reject</a>
                                 @endif
+                                @else
+                                    <div class="btn btn-primary btn-sm">{{ __("Done") }}</div>
+                                @endif
+
                             </td>
                         </tr>
                     </tbody>
@@ -74,13 +79,13 @@
                     <div class="col-sm-6">
                         <h6>Front Check</h6>
                         <a target="_blank" href="{{ asset($deposit->meta['front_cheque']) }}">
-                            <img src="{{ asset('core/public/images/'.$deposit->meta['front_cheque']) }}" alt="">
+                            <img style="width: 100%; height: 100px" src="{{ asset('images/'.$deposit->meta['front_cheque']) }}" alt="">
                         </a>
                     </div>
                     <div class="col-sm-6">
                         <h6>Back Check</h6>
                         <a target="_blank" href="{{ asset($deposit->meta['back_cheque']) }}">
-                            <img src="{{ asset('core/public/images/'.$deposit->meta['back_cheque']) }}" alt="">
+                            <img style="width: 100%; height: 100px"  src="{{ asset('images/'.$deposit->meta['back_cheque']) }}" alt="">
                         </a>
                     </div>
                     @elseif ($deposit->type == 'bank_transfer')
@@ -90,7 +95,7 @@
                     </div>
                     <div class="col-sm-6">
                         <h6>Proof</h6>
-                        <a target="_blank" class="text-primary" href="{{ asset('core/public/images/'.$deposit->meta['proof'] ?? '') }}">
+                        <a target="_blank" class="text-primary" href="{{ asset('images/'.$deposit->meta['proof'] ?? '') }}">
                             Preview <i data-feather='arrow-right-circle'></i>
                         </a>
                     </div>
