@@ -153,8 +153,8 @@ class LoanController extends Controller
     {
         $pageTitle = 'Total Loan';
         $user = Auth::user();
-
-        return view($this->activeTemplate . 'user.loan.total_loan', compact('pageTitle'));
+        $loan = Loan::latest()->where('user_id', $user->id)->whereStatus(2)->sum('amount');
+        return view($this->activeTemplate . 'user.loan.total_loan', compact('pageTitle', 'loan'));
     }
 
 
