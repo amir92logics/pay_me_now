@@ -81,16 +81,40 @@
                                     placeholder="0.00" />
                             </div>
 
-                            <div class="mb-1 col-md-6">
+                            <div class="mb-1 col-md-12">
                                 <label class="form-label" for="duration">Duration (Months)</label>
                                 <input type="number" name="duration" id="duration" class="form-control"
                                     placeholder="Enter Loan Duration" />
                             </div>
-
+                            
                             <div class="mb-1 col-md-6">
-                                <label class="form-label" for="attachment">Attach Documents <span class="text-warning">(png, jpg, jpeg)</span></label>
+                                <label class="form-label" for="attachment">Attach Image <span class="text-warning">(png, jpg, jpeg)</span></label>
                                 <input type="file" name="attachment[]" id="attachment" class="form-control" multiple />
                             </div>
+                            <div class="mb-1 col-md-12">
+                                <div class="row">
+                                    <div class="col-12">
+                                    <label class="form-label" for="attachment1">Attach Documents <span class="text-warning">(pdf, word)</span></label>
+                                    </div>
+                                    <!-- <div class="col-8 mb-3 "> -->
+                                        <div class="col-md-10 ">
+                                        <!-- <label class="form-label" for="attachment">Attach Documents <span class="text-warning">(pdf)</span></label> -->
+                                         <input type="file" name="attachment1[]" id="attachment1" class="form-control" multiple />
+                                            </div> 
+                                            <div class="col-md-2 ">
+                                                <button type="button" class=" property-btn extraTicketAttachment ms-0">
+                                                    <i data-feather="plus" class="align-middle ms-sm-25 ms-0"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-12">
+                                        <div id="fileUploadsContainer"></div>
+                                    </div>
+                                </div>
+                            </div>
+
 
                         </div>
                         <div class="d-flex justify-content-between">
@@ -144,5 +168,38 @@
                 }
             });
         };
+   
+        var fileAdded = 0;
+        $('.extraTicketAttachment').on('click', function () {
+            if (fileAdded >= 7) {
+                notify('error', 'You\'ve added maximum number of documents');
+                return false;
+            }
+            fileAdded++;
+            $("#fileUploadsContainer").append(`
+            <div class="row">
+                                    <div class="col-12">
+                                    <label class="form-label" for="attachment">Attach Documents <span class="text-warning">(pdf)</span></label>
+                                    </div>
+                                    <!-- <div class="col-8 mb-3 "> -->
+                                        <div class="col-md-10 ">
+                                        <!-- <label class="form-label" for="attachment">Attach Documents <span class="text-warning">(pdf)</span></label> -->
+                                         <input type="file" name="attachment1[]" id="attachment1" class="form-control" multiple />
+                                            </div> 
+                                            <div class="col-md-2 ">
+                                                <button type="button" class="h1 property-btn extraTicketAttachmentDelete ms-0">
+                                                   -
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                `)
+        });
+
+        $(document).on('click', '.extraTicketAttachmentDelete', function () {
+            fileAdded--;
+            $(this).closest('.row').remove();
+        });
+
     </script>
 @endpush

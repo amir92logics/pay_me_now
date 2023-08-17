@@ -45,6 +45,8 @@ class LoanController extends Controller
 
     public function requestsubmit(Request $request)
     {
+        dd('sdfsdf');
+
         $request->validate([
             'amount' => 'required|string|max:50',
             'plan' => 'required|string|max:50',
@@ -121,6 +123,18 @@ class LoanController extends Controller
             $loan->save();
 
             if ($request->hasfile('attachment')) {
+                foreach ($request->file('attachment') as $file) {
+                    $name = time() . rand(1, 100) . '.' . $file->extension();
+                    $file->move(public_path('loan_attachment'), $name);
+                    LoanAttribute::create([
+                        'data_key' => 'attachment',
+                        'data_type' => 'image',
+                        'data_value' => $name,
+                        'loan_id' => $loan->id,
+                    ]);
+                }
+            }
+            if ($request->hasfile('attachment1')) {
                 foreach ($request->file('attachment') as $file) {
                     $name = time() . rand(1, 100) . '.' . $file->extension();
                     $file->move(public_path('loan_attachment'), $name);
