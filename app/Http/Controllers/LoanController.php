@@ -45,7 +45,7 @@ class LoanController extends Controller
 
     public function requestsubmit(Request $request)
     {
-        dd('sdfsdf');
+        // dd('sdfsdf');
 
         $request->validate([
             'amount' => 'required|string|max:50',
@@ -53,6 +53,7 @@ class LoanController extends Controller
             'duration' => 'required|string',
             'attachment' => ['required'],
             'attachment.*' => ['image', 'mimes:png,jpg,jpeg'],
+            'documents.*' => ['file', 'mimes:pdf'],
         ], [
             'amount.required' => 'Please Enter Loan Amount',
             'duration.required' => 'Please Enter Loan Duration',
@@ -60,15 +61,16 @@ class LoanController extends Controller
             'attachment.required' => 'Please Upload Images as Attachment',
             'attachment.*.image' => 'Please Upload Images as Attachment',
             'attachment.*.mimes' => 'Please Upload Images as Attachment',
+            'documents.*.mimes' => 'Please Upload pdf document as Attachment',
         ]);
 
         $user = Auth::user();
 
         $plan = LoanPlan::where('id', $request->plan)->where('status', 1)->firstOrFail();
-        $metas = LoanPlan::where('id', $request->plan)->where('status', 1)->firstOrFail()->meta;
+        $metas = LoanPlan::where('id', $request->plan)->where('status', 1)->firstOrFail();
 
-        $running = Loan::where('user_id', $user->id)->where('status', 1)->first();
-        $pending = Loan::where('user_id', $user->id)->where('status', 0)->first();
+        // $running = Loan::where('user_id', $user->id)->where('status', 1)->first();
+        // $pending = Loan::where('user_id', $user->id)->where('status', 0)->first();
         $user = auth()->user();
         if ($request->amount < $plan->min) {
             $notify[] = ['error', 'Your requested amount is smaller than minimum amount.'];
@@ -84,25 +86,30 @@ class LoanController extends Controller
             return back()->withNotify($notify);
         }
 
-        if ($running) {
-            $notify[] = ['error', 'You have a running loan. Please Pay Up Loan'];
-            return back()->withNotify($notify);
-        }
+        // if ($running) {
+        //     $notify[] = ['error', 'You have a running loan. Please Pay Up Loan'];
+        //     return back()->withNotify($notify);
+        // }
 
-        if ($pending) {
-            $notify[] = ['error', 'You have a pending loan request. Please wait for processing'];
-            return back()->withNotify($notify);
-        }
+        // if ($pending) {
+        //     $notify[] = ['error', 'You have a pending loan request. Please wait for processing'];
+        //     return back()->withNotify($notify);
+        // }
 
         $user_data = [];
-        foreach ($metas as $key => $meta) {
-            if ($request->hasFile($meta['field_name'])) {
-                $user_data[$key] = $this->upload($request, $meta['field_name']);
-            } else {
-                $user_data[$key] = request($meta['field_name']);
+        // foreach ($metas as $key => $meta) {
+        //     if ($request->hasFile($meta['field_name'])) {
+        //         $user_data[$key] = $this->upload($request, $meta['field_name']);
+        //     } else {
+        //         $user_data[$key] = request($meta['field_name']);
+        //     }
+        // }
+        if ($request->hasfile('documents')) {
+            foreach ($request->file('documents') as $file) {
+                $name = time() . rand(1, 100) . '.' . $file->extension();
+                array_push($user_data, $name);
             }
         }
-
         DB::transaction(function () use ($plan, $user, $request, $user_data) {
             $interest = 0 + ($request->amount * $plan->fee / 100);
             $total = $request->amount + $interest;
@@ -134,14 +141,13 @@ class LoanController extends Controller
                     ]);
                 }
             }
-            if ($request->hasfile('attachment1')) {
-                foreach ($request->file('attachment') as $file) {
-                    $name = time() . rand(1, 100) . '.' . $file->extension();
-                    $file->move(public_path('loan_attachment'), $name);
+            if ($request->hasfile('documents')) {
+                foreach ($request->file('documents')  as $key=>$file) {
+                    $file->move(public_path('loan_attachment'),$user_data[$key]);
                     LoanAttribute::create([
                         'data_key' => 'attachment',
-                        'data_type' => 'image',
-                        'data_value' => $name,
+                        'data_type' => 'file',
+                        'data_value' =>$user_data[$key],
                         'loan_id' => $loan->id,
                     ]);
                 }

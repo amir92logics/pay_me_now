@@ -91,15 +91,17 @@
                                 <label class="form-label" for="attachment">Attach Image <span class="text-warning">(png, jpg, jpeg)</span></label>
                                 <input type="file" name="attachment[]" id="attachment" class="form-control" multiple />
                             </div>
+                            <label><input type="checkbox" name="colorCheckbox" value="additional"> Additional Infomation</label>
+                            <div class="additional box-additional">
                             <div class="mb-1 col-md-12">
                                 <div class="row">
                                     <div class="col-12">
-                                    <label class="form-label" for="attachment1">Attach Documents <span class="text-warning">(pdf, word)</span></label>
+                                    <label class="form-label" for="documents">Attach Documents <span class="text-warning">(pdf, word)</span></label>
                                     </div>
                                     <!-- <div class="col-8 mb-3 "> -->
                                         <div class="col-md-10 ">
                                         <!-- <label class="form-label" for="attachment">Attach Documents <span class="text-warning">(pdf)</span></label> -->
-                                         <input type="file" name="attachment1[]" id="attachment1" class="form-control" multiple />
+                                         <input type="file" name="documents[]" id="documents" class="form-control" multiple />
                                             </div> 
                                             <div class="col-md-2 ">
                                                 <button type="button" class=" property-btn extraTicketAttachment ms-0">
@@ -113,6 +115,7 @@
                                         <div id="fileUploadsContainer"></div>
                                     </div>
                                 </div>
+                            </div>
                             </div>
 
 
@@ -184,7 +187,7 @@
                                     <!-- <div class="col-8 mb-3 "> -->
                                         <div class="col-md-10 ">
                                         <!-- <label class="form-label" for="attachment">Attach Documents <span class="text-warning">(pdf)</span></label> -->
-                                         <input type="file" name="attachment1[]" id="attachment1" class="form-control" multiple />
+                                         <input type="file" name="documents[]" id="documents" class="form-control" multiple />
                                             </div> 
                                             <div class="col-md-2 ">
                                                 <button type="button" class="h1 property-btn extraTicketAttachmentDelete ms-0">
@@ -200,6 +203,10 @@
             fileAdded--;
             $(this).closest('.row').remove();
         });
-
+        $('input[type="checkbox"]').click(function(){
+        var inputValue = $(this).attr("value");
+        $("." + inputValue).toggle();
+        
+    });
     </script>
 @endpush

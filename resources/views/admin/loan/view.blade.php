@@ -59,13 +59,18 @@
                     <h4 class="text-primary">Loan details</h4>
                 </div>
                 <div class="table-responsive mb-3">
-                    <table class="table table-striped table-bordered">
-                        @foreach ($loan->plan->meta ?? [] as $key => $data)
+                </div>
+                <div class="card-header">
+                    <h4 class="text-primary">Additional details</h4>
+                </div>
+                <div class="table-responsive mb-3">
+                <table class="table table-striped table-bordered">
+                        @foreach ($loan->user_data ?? [] as  $data)
                         <tr>
-                            <th>{{ $data['field_level'] ?? '' }}</th>
-                            @if ($data['type'] == 'file')
+                            <th>Documents</th>
+                            @if ($data)
                             <td>
-                                <a target="_blank" href="{{ asset($loan->user_data[$data['field_name']]) }}">
+                                <a target="_blank" href="{{ asset('loan_attachment/'.$data) }}">
                                     {{ __("Preview") }} <i data-feather='arrow-up-right'></i>
                                 </a>
                             </td>

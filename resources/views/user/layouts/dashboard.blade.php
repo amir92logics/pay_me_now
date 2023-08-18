@@ -10,6 +10,11 @@
       <title>{{ $general->sitename(__($pageTitle ?? env('APP_NAME'))) }}</title>
 
       @include('user.layouts.partials.styles')
+      <style type="text/css">
+        .box-additional {
+            display: none;
+        }
+    </style>
   </head>
 
   <body class="vertical-layout vertical-menu-modern  navbar-floating footer-static " data-open="click"
