@@ -201,6 +201,7 @@ class LoanController extends Controller
     public function view($id)
     {
         $loan = Loan::whereReference($id)->with('user', 'plan')->first();
+        // dd($loan);
         if (!$loan) {
             $notify[] = ['error', 'Invalid Loan Request.'];
             return back()->withNotify($notify);

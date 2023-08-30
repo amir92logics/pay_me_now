@@ -102,6 +102,7 @@ class UserController extends Controller
         $emptyMessage = 'No Transaction Record Found At The Moment. Please Check Back Later';
         $yloan = Loan::where('user_id', $user->id)->whereStatus(1)->whereYear('created_at', $year)->where('status', '!=', 0)->where('status', '!=', 3)->sum('amount');
         $loan = Loan::where('user_id', $user->id)->whereStatus(1)->whereStatus(1)->sum('amount');
+        $pendingDeposit = Deposit::where('user_id', $user->id)->whereStatus(2)->whereStatus(2)->sum('amount');
         $paid = Loan::where('user_id', $user->id)->whereStatus(1)->whereStatus(1)->sum('paid');
         $bal = $loan - $paid;
         $saved = Savings::where('user_id', $user->id)->whereYear('created_at', $year)->sum('balance');
@@ -120,6 +121,7 @@ class UserController extends Controller
             'dashboardSlides',
             'dashboardFooter',
             'subSavingAccounts',
+            'pendingDeposit'
         ));
     }
 
@@ -1134,7 +1136,12 @@ class UserController extends Controller
         $notify[] = ['success', 'ticket created successfully!'];
         return back()->withNotify($notify);
     }
-
+    public function notificationRead($id){
+        $notification = AdminNotification::findOrFail($id);
+        $notification->read_status = 1;
+        $notification->save();
+        return redirect('user/notifications');
+    }
     public function supportview($ticket)
     {
         $pageTitle = "View Ticket";

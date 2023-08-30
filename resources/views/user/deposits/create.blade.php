@@ -28,15 +28,53 @@
                     </div>
 
                     <div class="row mt-3">
-                        <div class="col-sm-6 mb-1">
+                        <div class="col-sm-12 mb-1">
                             <label for="bank_id">Select Bank</label>
-                            <select name="bank_id" class="form-control" id="bank_id">
+                            <select name="bank_id" onchange="myFunction()" class="form-control" id="bank_id">
                                 <option value="">-Select a Bank-</option>
                                 @foreach ($banks as $bank)
-                                    <option value="{{ $bank->id }}">{{ $bank->name }}</option>
+                                    <option value="{{ $bank->id }}" data-id="{{ $bank->id }}" data-resource="{{ $bank }}"
+                                            data-account_name="{{ $bank->account_name}}"
+                                            data-bank_name="{{$bank->name }}"
+                                            data-charge="{{ $bank->charge }}"
+                                            data-account_number="{{$bank->account_no }}"
+                                            data-code="{{$bank->code }}"
+                                            data-desc="{{$bank->description }}"
+                                            >{{ $bank->name }}</option>
                                 @endforeach
                             </select>
                         </div>
+
+                        <div class="mb-1 form-password-toggle col-md-6">
+                                <label class="form-label" for="bank_name">Bank Name</label>
+                                <input type="text" readonly name="bank_name" id="bank_name" class="form-control"
+                                    placeholder="" />
+                            </div>
+                            <div class="mb-1 form-password-toggle col-md-6">
+                                <label class="form-label" for="account_name">Account Name</label>
+                                <input type="text" readonly name="account_name" id="account_name" class="form-control"
+                                    placeholder="" />
+                            </div>
+                            <div class="mb-1 form-password-toggle col-md-6">
+                                <label class="form-label" for="charge">Charge</label>
+                                <input type="text" readonly name="charge" id="charge" class="form-control"
+                                    placeholder="0.00" />
+                            </div>
+                            <div class="mb-1 form-password-toggle col-md-6">
+                                <label class="form-label" for="account_number">Account Number</label>
+                                <input type="text" readonly name="account_number" id="account_number" class="form-control"
+                                    placeholder="" />
+                            </div>
+                             <div class="mb-1 form-password-toggle col-md-6">
+                                <label class="form-label" for="code">Sort Code</label>
+                                <input type="text" readonly name="code" id="code" class="form-control"
+                                    placeholder="" />
+                            </div>
+                             <div class="mb-1 form-password-toggle col-md-6">
+                                <label class="form-label" for="desc">Description</label>
+                                <textarea  readonly name="desc" id="desc" class="form-control"
+                                    placeholder="" ></textarea>
+                            </div>
                         <div class="col-sm-6 mb-1">
                             <label for="account_no">Bank Account No.</label>
                             <input type="text" name="account_no" id="account_no" class="form-control" placeholder="Enter your account number" required>
@@ -127,6 +165,21 @@
 
 @push('script')
     <script>
+         function myFunction() {
+            var bank_id = $("#bank_id option:selected").attr('data-id');
+            var bank_name = $("#bank_id option:selected").attr('data-bank_name');
+            var account_number = $("#bank_id option:selected").attr('data-account_number');
+            var account_name = $("#bank_id option:selected").attr('data-account_name');
+            var charge = $("#bank_id option:selected").attr('data-charge');
+            var code = $("#bank_id option:selected").attr('data-code');
+            var desc = $("#bank_id option:selected").attr('data-desc');
+            document.getElementById("bank_name").value = bank_name;
+            document.getElementById("account_number").value = account_number;
+            document.getElementById("account_name").value = account_name;
+            document.getElementById("charge").value = charge;
+            document.getElementById("code").value = code;
+            document.getElementById("desc").value = desc;
+         }
         function frontPreview(input){
             var file = $("#front_cheque").get(0).files[0];
             if(file){

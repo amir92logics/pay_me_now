@@ -192,6 +192,7 @@ class AdminController extends Controller
 
 
     public function notificationRead($id){
+        dd('dsfad', $id);
         $notification = AdminNotification::findOrFail($id);
         $notification->read_status = 1;
         $notification->save();

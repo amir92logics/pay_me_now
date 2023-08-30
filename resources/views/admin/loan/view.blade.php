@@ -55,16 +55,17 @@
         </div>
         <div class="col-md-5">
             <div class="card">
-                <div class="card-header">
+                <!-- <div class="card-header">
                     <h4 class="text-primary">Loan details</h4>
                 </div>
                 <div class="table-responsive mb-3">
-                </div>
+                    
+                </div> -->
                 <div class="card-header">
                     <h4 class="text-primary">Additional details</h4>
                 </div>
                 <div class="table-responsive mb-3">
-                <table class="table table-striped table-bordered">
+                    <table class="table table-striped table-bordered">
                         @foreach ($loan->user_data ?? [] as  $data)
                         <tr>
                             <th>Documents</th>

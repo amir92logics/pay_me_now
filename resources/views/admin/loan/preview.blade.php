@@ -14,7 +14,7 @@
             </div>
             @forelse ($loan->attributes as $attribute)
             @if ($attribute->data_type == 'image')
-            <img class="img-fluid py-3 px-2" src="/core/public/loan_attachment/{{ $attribute->data_value }}" alt="Loan Attachment">
+            <img class="img-fluid py-3 px-2" src="loan_attachment/{{ $attribute->data_value }}" alt="Loan Attachment">
             @else
 
             @endif

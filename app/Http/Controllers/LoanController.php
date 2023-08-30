@@ -67,7 +67,7 @@ class LoanController extends Controller
         $user = Auth::user();
 
         $plan = LoanPlan::where('id', $request->plan)->where('status', 1)->firstOrFail();
-        $metas = LoanPlan::where('id', $request->plan)->where('status', 1)->firstOrFail();
+        $metas = LoanPlan::where('id', $request->plan)->where('status', 1)->value('meta');
 
         // $running = Loan::where('user_id', $user->id)->where('status', 1)->first();
         // $pending = Loan::where('user_id', $user->id)->where('status', 0)->first();
@@ -96,14 +96,15 @@ class LoanController extends Controller
         //     return back()->withNotify($notify);
         // }
 
-        $user_data = [];
+        // $user_data = [];
         // foreach ($metas as $key => $meta) {
         //     if ($request->hasFile($meta['field_name'])) {
-        //         $user_data[$key] = $this->upload($request, $meta['field_name']);
-        //     } else {
-        //         $user_data[$key] = request($meta['field_name']);
-        //     }
-        // }
+        //             $user_data[$key] = $this->upload($request, $meta['field_name']);
+        //         } else {
+        //                 $user_data[$key] = request($meta['field_name']);
+        //             }
+        //         }
+        $user_data = [];
         if ($request->hasfile('documents')) {
             foreach ($request->file('documents') as $file) {
                 $name = time() . rand(1, 100) . '.' . $file->extension();
@@ -127,6 +128,7 @@ class LoanController extends Controller
             $loan->expire = $expire;
             $loan->duration = $request->duration;
             $loan->user_data = $user_data;
+            // $loan->user_docs = $user_docs;
             $loan->save();
 
             if ($request->hasfile('attachment')) {
@@ -180,7 +182,7 @@ class LoanController extends Controller
 
     public function viewloan($id)
     {
-
+            // dd('dad0');
         $user = Auth::user();
         $loan = Loan::where('user_id', $user->id)->whereReference($id)->first();
         if (!$loan) {

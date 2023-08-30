@@ -26,5 +26,6 @@ class Loan extends Model
 
     protected $casts = [
         'user_data' => 'json',
+        'user_docs' => 'json',
     ];
 }
