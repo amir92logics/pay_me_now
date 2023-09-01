@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Lib\GoogleAuthenticator;
 use App\Models\AdminNotification;
 use App\Models\GeneralSetting;
+use App\Models\savingPlan;
 use App\Models\Transaction;
 use App\Models\WithdrawMethod;
 use App\Models\Withdrawal;
@@ -30,9 +31,11 @@ class SavingsController extends Controller
     {
         $pageTitle = 'New Savings';
         $user = Auth::user();
+        $plans = savingPlan::latest()->where('status', 1)->get();
         return view($this->activeTemplate . 'user.savings.request', compact(
             'pageTitle',
-            'user'
+            'user',
+            'plans'
         ));
     }
 

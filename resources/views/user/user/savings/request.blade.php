@@ -49,11 +49,43 @@
 
             <div class="mb-1 col-md-12">
               <label class="form-label" for="username">Plan</label>
-              <select id="first" name="type" class="form-control">
+              <select onchange="myFunction()" id="first" name="" class="select form-select" id="select2-basic">
               <option selected disabled>Select An Option</option>
+              @foreach ($plans as $data)
+                                        <option value="{{ $data->id+1 }}" data-id="{{ $data->id }}" data-resource="{{ $data }}"
+                                        data-name="{{$data->name }}"
+                                            data-min_amount="{{ showAmount($data->min) }}{{ __($general->cur_text) }}"
+                                            data-max_amount="{{ showAmount($data->max) }}{{ __($general->cur_text) }}"
+                                            data-duration="{{ $data->duration }}"> {{ __($data->name) }}
+                                        </option>
+                                    @endforeach
+              <!--
                <option value="1">Recurrent Savings</option>
-            <option value="2">Target Savings</option>
+            <option value="2">Target Savings</option> -->
               </select>
+              <div class="mb-1 col-md-6">
+                                <label class="form-label" for="email">Saving Plan Name</label>
+                                <input type="text" id="name" readonly class="form-control" placeholder="name"
+                                    aria-label="0" />
+                            </div>
+
+                            <input type="hidden" id="method_code" name="plan">
+
+                            <div class="mb-1 form-password-toggle col-md-6">
+                                <label class="form-label" for="Min">Min Amount</label>
+                                <input type="text" readonly name="min" id="min" class="form-control"
+                                    placeholder="0.00" />
+                            </div>
+                            <div class="mb-1 form-password-toggle col-md-6">
+                                <label class="form-label" for="Max">Max Amount</label>
+                                <input type="text" readonly name="max" id="max" class="form-control"
+                                    placeholder="0.00" />
+                            </div>
+                            <div class="mb-1 form-password-toggle col-md-6">
+                                <label class="form-label" for="duration">Duration (Months)</label>
+                                <input readonly type="text" name="duration" id="duration" class="form-control"
+                                    placeholder="Duration" />
+                            </div>
 @push('script')
 <script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
 <script type="text/javascript">
@@ -184,6 +216,30 @@ $(document).ready(function(){
 <script src="{{ asset($activeTemplateTrue. 'app-assets/vendors/js/forms/select/select2.full.min.js')}}"></script>
 <script src="{{ asset($activeTemplateTrue. 'app-assets/vendors/js/forms/validation/jquery.validate.min.js')}}"></script>
 <script src="{{ asset($activeTemplateTrue. 'app-assets/js/scripts/forms/form-wizard.min.js')}}"></script>
+<script>
+        function myFunction() {
+            var plan_id = $("#first option:selected").attr('data-id');
+            var name = $("#first option:selected").attr('data-name');
+            var duration = $("#first option:selected").attr('data-duration');
+            var min_amount = $("#first option:selected").attr('data-min_amount');
+            var max_amount = $("#first option:selected").attr('data-max_amount');
+            document.getElementById("name").value = name;
+            document.getElementById("min").value = min_amount;
+            document.getElementById("max").value = max_amount;
+            document.getElementById("duration").value = duration + " Months";
 
+            $.ajax({
+                type: 'GET',
+                url: $('#plan-url').val(),
+                data: {
+                    plan_id:plan_id
+                },
+                success: function (res) {
+                    $('#plan-inputs').append(res.data);
+                    console.log(res);
+                }
+            });
+        };
+        </script>
 @endpush
 

@@ -184,6 +184,11 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->group(function () {
 
         // SAVINGS SYSTEM
         Route::name('savings.')->prefix('savings')->group(function () {
+            Route::get('/savingPlan', 'SavingsController@savingPlan')->name('savingPlan');
+            Route::get('plan/create', 'SavingsController@planCreate')->name('plan.create');
+            Route::post('/create', 'SavingsController@create')->name('create');
+            Route::get('/edit/{id}', 'SavingsController@edit')->name('edit');
+            Route::post('/update/{id}', 'SavingsController@update')->name('update');
             Route::get('/target', 'SavingsController@target')->name('target');
             Route::get('/recurrent', 'SavingsController@recurrent')->name('recurrent');
             Route::get('/view/{id}', 'SavingsController@view')->name('view');

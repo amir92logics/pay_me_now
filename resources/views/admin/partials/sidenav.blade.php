@@ -120,6 +120,11 @@
                         data-feather="shopping-bag"></i><span class="menu-title text-truncate"
                         data-i18n="Invest">@lang('Manage Savings')</span></a>
                 <ul class="menu-content">
+                    <li class="@if (\Route::current()->getName() == 'admin.savings.savingPlan') active @endif"><a class="d-flex align-items-center"
+                            href="{{ route('admin.savings.savingPlan') }}"><i data-feather="circle"></i><span
+                                class="menu-item text-truncate"
+                                data-i18n="@lang('Target')">@lang('Saving Plans')</span></a>
+                    </li>
                     <li class="@if (\Route::current()->getName() == 'admin.savings.target') active @endif"><a class="d-flex align-items-center"
                             href="{{ route('admin.savings.target') }}"><i data-feather="circle"></i><span
                                 class="menu-item text-truncate"
