@@ -123,7 +123,7 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->group(function () {
         Route::get('users/tickets/open', 'ManageUsersController@openticket')->name('users.open.ticket');
         Route::get('users/tickets/replied', 'ManageUsersController@repliedticket')->name('users.replied.ticket');
         Route::get('users/tickets/closed', 'ManageUsersController@closedticket')->name('users.closed.ticket');
-        Route::get('users/tickets/view/{id}', 'ManageUsersController@supportview')->name('user.ticket.view');
+        Route::get('users/suport/view/{id}', 'ManageUsersController@supportview')->name('user.ticket.view');
         Route::post('users/tickets/reply/{id}', 'ManageUsersController@supportMessageReply')->name('user.ticket.reply');
         Route::get('users/tickets/download/{id}', 'ManageUsersController@ticketDownload')->name('user.ticket.download');
 

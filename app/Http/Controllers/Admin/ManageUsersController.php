@@ -2,6 +2,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\AdminNotification;
 use App\Models\Deposit;
 use App\Models\EmailLog;
 use App\Models\Gateway;
@@ -542,14 +543,14 @@ class ManageUsersController extends Controller
     {
         $pageTitle = "View Ticket";
         $my_ticket = SupportTicket::where('ticket', $ticket)->latest()->first();
-        $messages = SupportMessage::where('supportticket_id', $my_ticket->id)->latest()->get();
+        $messages = SupportMessage::with('attachments')->where('supportticket_id', $my_ticket->id)->latest()->get();
         $user = Auth::user();
         $topics = Desk::all();
-        if ($my_ticket->user_id == Auth::id()) {
+        // if ($my_ticket->user_id == Auth::id()) {
             return view('admin.support.view', compact('my_ticket', 'messages', 'pageTitle', 'user', 'topics'));
-        } else {
-            return abort(404);
-        }
+        // } else {
+        //     return abort(404);
+        // }
 
     }
 
@@ -603,6 +604,13 @@ class ManageUsersController extends Controller
                         ]);
                     }
                 }
+                $admin = Auth::guard('admin')->user();
+                // dd($admin);
+                $adminNotification = new AdminNotification();
+                $adminNotification->user_id = $admin->id;
+                $adminNotification->title = 'New support ticket from '.$admin->name;
+                $adminNotification->click_url = urlPath('user.ticket.view',$ticket->id);
+                $adminNotification->save();
 
                  $notify[] = ['success', 'Support ticket replied successfully!'];
                  return back()->withNotify($notify);

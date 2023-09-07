@@ -133,17 +133,8 @@
                             <h3 class="mb-75 mt-2 pt-50">
                                 <a href="#"> {{ $general->cur_sym }} {{ showAmount($user->balance) }}</a>
                             </h3>
-                           
-                            <div class="row mt-4">
-                            @if ($pendingDeposit > 0)
-                            <div class="col-md-8 col-12">
-                                 <h5> <b>@lang('Pending Balance')</b></h5>
-                            <h3 class="mb-75 mt-2 pt-30">
-                            <a href="#"> {{ $general->cur_sym }}  {{$pendingDeposit}}</a>
-                            </h3>
-                                </div>
-                                @endif
-                                <div class="col-md-4 col-12">
+                            @if ($pendingDeposit == 0)
+                            <div class="row mt-2">
                                 <div class="col-12 text-end">
                                     <button type="button" class="btn btn-dark btn-sm d-block float-end" data-bs-toggle="popover" data-bs-placement="top" data-bs-container="body" title="" data-bs-content="{{ Auth::user()->account_number }}" data-bs-original-title="Account No." aria-describedby="popover343370">
                                         <i data-feather='eye'></i>
@@ -152,7 +143,28 @@
                                 <div class="col-12 text-end">
                                     <a href="{{ route('user.deposits.index') }}" class="btn btn-primary text-end mt-1">{{ __('Deposit') }}</a>
                                 </div>
+                            </div>
+                            @endif
+                            @if ($pendingDeposit > 0)
+                            <div class="row mt-4">
+                            <div class="col-md-8 col-12">
+                                 <h5> <b>@lang('Pending Balance')</b></h5>
+                            <h3 class="mb-75 mt-2 pt-30">
+                            <a href="#"> {{ $general->cur_sym }}  {{$pendingDeposit}}</a>
+                            </h3>
                                 </div>
+                                <div class="col-md-4 col-12">
+                                <div class="col-12 text-end">
+                                    <button type="button" class="btn btn-dark btn-sm d-block float-end" data-bs-toggle="popover" data-bs-placement="top" data-bs-container="body" title="" data-bs-content="{{ Auth::user()->account_number }}" data-bs-original-title="Account No." aria-describedby="popover343370">
+                                        <i data-feather='eye'></i>
+                                    </button>
+                                </div>
+                                <div class="col-12 text-end">
+                                    <a href="{{ route('user.deposits.index') }}" class="btn btn-primary float-end mt-1">{{ __('Deposit') }}</a>
+                                </div>
+                                </div>
+                                @endif
+
                                 
                             </div>
                         </div>
@@ -160,7 +172,7 @@
                 </div>
 
                 {{-- @if ($loan || $bal) --}}
-                <div class="col-md-4 col-6">
+                <div class="col-md-2 col-6">
                     <div class="card">
                         <div class="card-body pb-50">
                             <h6>Active Loan</h6>
@@ -172,7 +184,7 @@
                 <!--/ Bar Chart - Orders -->
 
                 <!-- Line Chart - Profit -->
-                <div class="col-md-4 col-6">
+                <div class="col-md-2 col-6">
                     <div class="card card-tiny-line-stats">
                         <div class="card-body pb-50">
                             <h6>Loan Balance</h6>

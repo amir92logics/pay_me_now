@@ -56,7 +56,7 @@
             <div class="chat-content">
               <p>{{$message->message}}</p><br>
               <small>{{ $message->created_at->format('l, dS F Y @ H:i') }}</small>
-               @if($message->attachments()->count() > 0)
+               @if($message->attachments->count() > 0)
          <div class="d-flex flex-column">
           @foreach($message->attachments as $k=> $image)
                 <a href="{{route('admin.user.ticket.download',encrypt($image->id))}}" class="mb-50">
@@ -80,7 +80,7 @@
             <div class="chat-content">
               <p>{{$message->message}}</p><br>
               <small>{{ $message->created_at->format('l, dS F Y @ H:i') }}</small>
-               @if($message->attachments()->count() > 0)
+               @if($message->attachments->count() > 0)
          <div class="d-flex flex-column">
           @foreach($message->attachments as $k=> $image)
                 <a href="{{route('admin.user.ticket.download',encrypt($image->id))}}" class="mb-50">

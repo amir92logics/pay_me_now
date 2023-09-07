@@ -65,14 +65,14 @@
                         <i data-feather='plus-circle'></i>
                         Send Money
                     </a>
-                    <button type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#statistic">
+                    <!-- <button type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#statistic">
                         <i data-feather='refresh-ccw'></i>
                         Statistics
                     </button>
                     <button type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#beneficiary">
                         <i data-feather='user-check'></i>
                         Beneficiary
-                    </button>
+                    </button> -->
                 </div>
 
                 <div class="col-sm-6 col-md-4 text-end">

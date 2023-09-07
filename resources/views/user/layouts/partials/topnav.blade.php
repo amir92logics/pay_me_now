@@ -38,7 +38,7 @@
                 <li class="nav-item dropdown dropdown-notification me-25"><a class="nav-link" href="#"
                     data-bs-toggle="dropdown"><i class=" text-white ficon" data-feather="bell"></i>
                     @if ($userNotifications->count() > 0)
-                        <!-- <span class="badge rounded-pill bg-danger badge-up">{{ $userNotifications->count() }}</span> -->
+                        <span class="badge rounded-pill bg-danger badge-up">{{ $userNotifications->count() }}</span>
                         <span class="badge rounded-pill bg-danger badge-up"></span>
                     @endif
                 </a>

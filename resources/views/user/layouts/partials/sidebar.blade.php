@@ -94,7 +94,7 @@
                 </ul>
             </li>
 
-            <!-- <li class="nav-item"><a class="d-flex align-items-center" href="#"><i
+            <li class="nav-item"><a class="d-flex align-items-center" href="#"><i
                         data-feather="shopping-bag"></i><span class="menu-title text-truncate"
                         data-i18n="Invoice">@lang('Sub Savings')</span></a>
                 <ul class="menu-content">
@@ -108,7 +108,7 @@
                     </li>
 
                 </ul>
-            </li> -->
+            </li>
             @endif
 
             @if ($meta->card ?? false)

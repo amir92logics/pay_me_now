@@ -1133,6 +1133,11 @@ class UserController extends Controller
                 ]);
             }
         }
+        $adminNotification = new AdminNotification();
+        $adminNotification->user_id = Auth::user()->id;
+        $adminNotification->title = 'New support ticket from '.Auth::user()->fullname;
+        $adminNotification->click_url = urlPath('admin.user.ticket.view',$ticket->ticket);
+        $adminNotification->save();
         $notify[] = ['success', 'ticket created successfully!'];
         return back()->withNotify($notify);
     }
@@ -1146,7 +1151,8 @@ class UserController extends Controller
     {
         $pageTitle = "View Ticket";
         $my_ticket = SupportTicket::where('ticket', $ticket)->latest()->first();
-        $messages = SupportMessage::where('supportticket_id', $my_ticket->id)->latest()->get();
+        $messages = SupportMessage::where('supportticket_id', $my_ticket->id)->with('attachments')->latest()->get();
+        // dd($messages);
         /**
          * @var App/Models/User $user
          */
