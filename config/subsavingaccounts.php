@@ -1,5 +1,5 @@
 <?php
 
 return [
-    'accounts_limit' => 6,
+    'accounts_limit' => 3,
 ];

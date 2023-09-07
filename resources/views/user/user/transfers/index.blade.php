@@ -1,47 +1,61 @@
 @extends($activeTemplate . 'layouts.dashboard')
 @section('content')
-    <div class="row d-flex justify-content-between">
+<div class="row d-flex justify-content-between">
+@if ($total > 0)
         <div class="col">
             <div class="card">
                 <div class="card-header flex-column align-items-start pb-0">
-                    <h2 class="fw-bolder mt-1">38.4K</h2>
+                    <h2 class="fw-bolder mt-1">{{$total}}K</h2>
                     <h6 class="card-text mb-3 text-primary">{{ __('Total Transfers') }}</h6>
                 </div>
             </div>
         </div>
+        @endif
+@if ($completed > 0)
+
         <div class="col">
             <div class="card">
                 <div class="card-header flex-column align-items-start pb-0">
-                    <h2 class="fw-bolder mt-1">38.4K</h2>
+                    <h2 class="fw-bolder mt-1">{{$completed}}K</h2>
                     <h6 class="card-text mb-3 text-success">{{ __('Completed Transfers') }}</h6>
                 </div>
             </div>
         </div>
+        @endif
+@if ($refund > 0)
+
         <div class="col">
             <div class="card">
                 <div class="card-header flex-column align-items-start pb-0">
-                    <h2 class="fw-bolder mt-1">38.4K</h2>
+                    <h2 class="fw-bolder mt-1">{{$refund}}K</h2>
                     <h6 class="card-text mb-3 text-info">{{ __('Refund Transfers') }}</h6>
                 </div>
             </div>
         </div>
+        @endif
+@if ($pending > 0)
+
         <div class="col">
             <div class="card">
                 <div class="card-header flex-column align-items-start pb-0">
-                    <h2 class="fw-bolder mt-1">38.4K</h2>
+                    <h2 class="fw-bolder mt-1">{{$pending}}K</h2>
                     <h6 class="card-text mb-3 text-warning">{{ __('Pending Transfers') }}</h6>
                 </div>
             </div>
         </div>
+        @endif
+@if ($cancled > 0)
+
         <div class="col">
             <div class="card">
                 <div class="card-header flex-column align-items-start pb-0">
-                    <h2 class="fw-bolder mt-1">38.4K</h2>
+                    <h2 class="fw-bolder mt-1">{{$cancled}}K</h2>
                     <h6 class="card-text mb-3 text-danger">{{ __('Cancled Transfers') }}</h6>
                 </div>
             </div>
         </div>
     </div>
+    @endif
 
     <div class="card">
         <div class="card-body">

@@ -30,8 +30,12 @@ class TransferController extends Controller
                     })
                     ->orWhere('email', auth()->user()->email)
                     ->with('sender')->paginate(10);
-
-        return view('user.user.transfers.index', compact('transfers', 'beneficiarys'));
+                    $total= Transfer::whereSenderId(auth()->id())->sum('amount');
+        $completed = Transfer::whereSenderId(auth()->id())->whereStatus(2)->sum('amount');
+        $pending = Transfer::whereSenderId(auth()->id())->whereStatus(1)->sum('amount');
+        $refund = Transfer::whereSenderId(auth()->id())->whereStatus(3)->sum('amount');
+        $cancled = Transfer::whereSenderId(auth()->id())->whereStatus(0)->sum('amount');
+        return view('user.user.transfers.index', compact('transfers', 'beneficiarys', 'total', 'completed', 'pending', 'refund', 'cancled'));
     }
 
     public function store(Request $request)

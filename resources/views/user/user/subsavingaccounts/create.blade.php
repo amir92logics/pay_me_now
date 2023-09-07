@@ -25,6 +25,14 @@
                         <h5 class="">New Sub Saving Account</h5>
                         <!-- <small class="text-muted"></small> -->
                     </div>
+                    <div class="row">
+
+<div class="mb-1 col-md-12">
+<div class="alert alert-warning" role="alert">
+  <div class="alert-body"><strong>Note!</strong>Please note that you can create only 3 subsaving accounts...</div>
+</div>
+</div>
+
 
                     <div class="row">
                         <div class="mb-1 col-md-6">

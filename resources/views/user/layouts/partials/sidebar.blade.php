@@ -94,7 +94,7 @@
                 </ul>
             </li>
 
-            <li class="nav-item"><a class="d-flex align-items-center" href="#"><i
+            <!-- <li class="nav-item"><a class="d-flex align-items-center" href="#"><i
                         data-feather="shopping-bag"></i><span class="menu-title text-truncate"
                         data-i18n="Invoice">@lang('Sub Savings')</span></a>
                 <ul class="menu-content">
@@ -108,7 +108,7 @@
                     </li>
 
                 </ul>
-            </li>
+            </li> -->
             @endif
 
             @if ($meta->card ?? false)
@@ -127,11 +127,11 @@
                             href="{{ route('user.transfers.index') }}"><i data-feather="circle"></i><span
                                 class="menu-item text-truncate" data-i18n="Transfer">User to User</span></a>
                     </li>
-                    @if ($meta->other_bank ?? false)
+                    <!-- @if ($meta->other_bank ?? false)
                     <li class="@if (\Route::current()->getName() == 'user.othertransfer') active @endif"><a class="d-flex align-items-center" href="{{ route('user.othertransfer') }}"><i data-feather="circle"></i>
                         <span class="menu-item text-truncate" data-i18n="Interl">Other Bank Transfer</span></a>
                     </li>
-                    @endif
+                    @endif -->
                 </ul>
             </li>
 
@@ -161,7 +161,7 @@
                         data-i18n="Leaflet Maps">Coin Swap</span></a>
             </li>
 
-            <li class=" navigation-header"><span data-i18n="User Interface">User Settings</span><i
+            <!-- <li class=" navigation-header"><span data-i18n="User Interface">User Settings</span><i
                     data-feather="more-horizontal"></i>
             </li>
             <li class=" nav-item @if (\Route::current()->getName() == 'user.profile.setting') active @endif"><a
@@ -184,7 +184,7 @@
                         data-feather="shield"></i><span class="menu-title text-truncate" data-i18n="Shield">Google
                         2FA</span></a>
 
-            </li>
+            </li> -->
             <li class=" navigation-header"><span data-i18n="Misc">Misc</span><i data-feather="more-horizontal"></i>
             </li>
             <li class=" nav-item @if (\Route::current()->getName() == 'user.atms.index') active @endif"><a

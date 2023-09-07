@@ -75,7 +75,7 @@
                     @endforeach
                 </ul>
             </li>
-            <li class="nav-item nav-search"><a class="nav-link nav-link-search"><i class="ficon text-white"
+            <!-- <li class="nav-item nav-search"><a class="nav-link nav-link-search"><i class="ficon text-white"
                         data-feather="search"></i></a>
                 <div class="search-input">
                     <div class="search-input-icon"><i data-feather="search"></i></div>
@@ -84,7 +84,7 @@
                     <div class="search-input-close  text-white"><i data-feather="x"></i></div>
                     <ul class="search-list search-list-main"></ul>
                 </div>
-            </li>
+            </li> -->
 
 
             <li class="nav-item dropdown dropdown-user"><a class="nav-link dropdown-toggle dropdown-user-link"
@@ -101,8 +101,17 @@
                         href="{{ route('user.profile.setting') }}"><i class="me-50" data-feather="user"></i>
                         @lang('Profile')</a>
                     <div class="dropdown-divider"></div><a class="dropdown-item"
+                        href="{{  route('user.kyc') }}"><i
+                        data-feather="camera"></i>
+                        @lang('Varification')</a>
+                        <a class="dropdown-item"
+                        href="{{ route('user.twofactor') }}"><i
+                        data-feather="shield"></i>
+                        @lang('Google
+                        2FA')</a><a class="dropdown-item"
                         href="{{ route('user.change.password') }}"><i class="me-50" data-feather="settings"></i>
-                        @lang('Security')</a><a class="dropdown-item" href="{{ route('user.logout') }}"><i
+                        @lang('Security')</a>
+                        <a class="dropdown-item" href="{{ route('user.logout') }}"><i
                             class="me-50" data-feather="power"></i>
                         @lang('Logout')</a>
                 </div>

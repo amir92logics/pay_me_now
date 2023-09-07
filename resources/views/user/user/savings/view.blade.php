@@ -46,17 +46,30 @@ $progress = $saved->paid / $saved->total * 100; @endphp
 
 <div class="col-lg-12 col-12">
         <!-- Sales Line Chart Card -->
+        
           <div class="card">
-            <div class="card-header align-items-start">
-              <div>
-                <h4 class="card-title mb-25">Savings Payment Chart</h4>
+          <div class="card-body">
+          <div class="row pb-50">
+            <div class="col-sm-6 col-12 d-flex justify-content-between flex-column order-sm-1 order-2 mt-1 mt-sm-0">
+              <div class="mb-1 mb-sm-0">
+              <h4 class="card-title mb-25">Savings Payment Chart</h4>
                 <p class="card-text mb-0">Total Savings: {{$general->cur_sym}} {{number_format($sum,2)}}</p>
+               
               </div>
-              <i data-feather="settings" class="font-medium-3 text-muted cursor-pointer"></i>
+
+            </div>
+            <div class="col-sm-6 col-12 d-flex justify-content-between flex-column text-end order-sm-2 order-1">
+              <div class="dropdown chart-dropdown">
+              <button data-bs-toggle="modal" href="#trxModal" onclick="openTrxModal('{{$saved->id}}')" class="btn btn-md btn-success">Transfer</button>
+
+              </div>
+              <div id="avg-sessions-chart"></div>
             </div>
             <div class="card-body pb-0">
               <div id="sales-line-chart"></div>
             </div>
+          </div>
+
           </div>
         </div>
         <!--/ Sales Line Chart Card -->
@@ -243,6 +256,52 @@ $progress = $saved->paid / $saved->total * 100; @endphp
               </div>
             </div>
 
+            {{-- Add Sub Balance MODAL --}}
+<div id="trxModal" class="modal fade" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">@lang('Transfer Balance')</h5>
+
+            </div>
+            <form action="{{route('user.subsaving.trx')}}" method="POST">
+                @csrf
+                <input type="hidden" name="account" id="accountId">
+                <div class="modal-body">
+                    <div class="form-row">
+                        <div class="form-group col-md-12">
+                            <div class="form-check form-switch form-check-primary mb-1">
+                                <input type="checkbox" class="form-check-input" name="act" id="customSwitch10" checked />
+                                <label class="form-check-label" for="customSwitch10">
+                                    <span class="switch-icon-left"><i data-feather="plus"></i></span>
+                                    <span class="switch-icon-right"><i data-feather="minus"></i></span>
+                                </label>
+                            </div>
+                            <small>Check toggle to credit and uncheck toggle to debit</small><br>
+                            <small>Your Main Account Balance is {{showAmount(auth_user()->balance)}} {{__($general->cur_text)}}</small><br>
+                        </div>
+                        <div class="form-group col-md-12">
+                            <label>@lang('Amount')<span class="text-danger">*</span></label>
+                            <div class="input-group has_append">
+                                <input type="number" min="0.00" step="0.01" name="amount" class="form-control" placeholder="@lang('Please provide positive amount')">
+                            </div>
+                        </div>
+                        <div class="form-group col-md-12">
+                            <label>@lang('Amount')</label>
+                            <div class="input-group has_append">
+                                <input type="text" name="details" class="form-control" placeholder="@lang('Optional Details')">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-warning" data-bs-dismiss="modal">@lang('Close')</button>
+                    <button type="submit" class="btn btn-success">@lang('Submit')</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
 
 @endsection
 @push('script')
@@ -252,5 +311,9 @@ $(window).on("load",(function(){"use strict";var e,o,r,t,a,s,i,n,l,d,c,h,p="#5e5
 <!-- BEGIN: Page JS-->
     <script src="{{ asset($activeTemplateTrue. 'app-assets/js/scripts/cards/card-analytics.min.jsg')}}"></script>
 <!-- END: Page JS-->
-
+<script>
+    function openTrxModal(accountId) {
+        document.getElementById('accountId').value = accountId;
+    }
+</script>
 @endpush

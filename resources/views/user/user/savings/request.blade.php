@@ -63,6 +63,7 @@
                <option value="1">Recurrent Savings</option>
             <option value="2">Target Savings</option> -->
               </select>
+              <div class="row">
               <div class="mb-1 col-md-6">
                                 <label class="form-label" for="email">Saving Plan Name</label>
                                 <input type="text" id="name" readonly class="form-control" placeholder="name"
@@ -85,6 +86,7 @@
                                 <label class="form-label" for="duration">Duration (Months)</label>
                                 <input readonly type="text" name="duration" id="duration" class="form-control"
                                     placeholder="Duration" />
+                            </div>
                             </div>
 @push('script')
 <script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>

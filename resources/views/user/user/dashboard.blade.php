@@ -135,12 +135,14 @@
                             </h3>
                            
                             <div class="row mt-4">
+                            @if ($pendingDeposit > 0)
                             <div class="col-md-8 col-12">
-                                 <h5> <b>@lang('Panding Balance')</b></h5>
+                                 <h5> <b>@lang('Pending Balance')</b></h5>
                             <h3 class="mb-75 mt-2 pt-30">
                             <a href="#"> {{ $general->cur_sym }}  {{$pendingDeposit}}</a>
                             </h3>
                                 </div>
+                                @endif
                                 <div class="col-md-4 col-12">
                                 <div class="col-12 text-end">
                                     <button type="button" class="btn btn-dark btn-sm d-block float-end" data-bs-toggle="popover" data-bs-placement="top" data-bs-container="body" title="" data-bs-content="{{ Auth::user()->account_number }}" data-bs-original-title="Account No." aria-describedby="popover343370">
