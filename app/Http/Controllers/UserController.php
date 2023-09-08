@@ -1141,18 +1141,42 @@ class UserController extends Controller
         $notify[] = ['success', 'ticket created successfully!'];
         return back()->withNotify($notify);
     }
+    // public function notificationRead($id){
+    //     $notification = AdminNotification::findOrFail($id);
+    //     $notification->read_status = 1;
+    //     $notification->save();
+    //     return redirect('user/notifications');
+    // }
+    public function notifications(){
+        $notifications = AdminNotification::orderBy('id','desc')->with('user')->paginate(getPaginate());
+        $pageTitle = 'Notifications';
+        return view('admin.notifications',compact('pageTitle','notifications'));
+    }
+
+
     public function notificationRead($id){
+        // dd('dsfad', $id);
         $notification = AdminNotification::findOrFail($id);
         $notification->read_status = 1;
         $notification->save();
-        return redirect('user/notifications');
+       
+        return redirect($notification->click_url);
     }
+
+    public function readAll(){
+        AdminNotification::where('read_status',0)->update([
+            'read_status'=>1
+        ]);
+        $notify[] = ['success','Notifications read successfully'];
+        return back()->withNotify($notify);
+    }
+
     public function supportview($ticket)
     {
+        // dd($ticket);
         $pageTitle = "View Ticket";
         $my_ticket = SupportTicket::where('ticket', $ticket)->latest()->first();
         $messages = SupportMessage::where('supportticket_id', $my_ticket->id)->with('attachments')->latest()->get();
-        // dd($messages);
         /**
          * @var App/Models/User $user
          */
@@ -1199,12 +1223,17 @@ class UserController extends Controller
 
                 $ticket->status = 2;
                 $ticket->save();
-
+                $admin = Auth::guard('admin')->user();
                 $message->supportticket_id = $ticket->id;
                 $message->type = 1;
                 $message->message = $request->message;
                 $message->save();
-
+                $adminNotification = new AdminNotification();
+                $adminNotification->user_id = $admin->id;
+                $adminNotification->title = 'Reply on support ticket from '.Auth::user()->fullname;
+                $adminNotification->click_url = urlPath('admin.user.ticket.view',$ticket->ticket);
+                $adminNotification->save();
+                
                 if ($request->hasFile('attachments')) {
                     foreach ($request->file('attachments') as $image) {
                         $filename = rand(1000, 9999) . time() . '.' . $image->getClientOriginalExtension();

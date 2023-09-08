@@ -32,6 +32,36 @@
                     </div>
 
                 </div>
+                <div class="row">
+                    <div class="mb-1 col-6">
+                        <label for="legalbusinessname" class="form-label">@lang('Legal Business Name')</label>
+                        <input type="text" class="form-control" id="legalbusinessname" name="legalbusinessname"
+                            value="{{ old('legalbusinessname') }}" placeholder="Enter Legal Business Name" aria-describedby="legalbusinessname"
+                            tabindex="1" autofocus />
+                    </div>
+                    <div class="mb-1 col-6">
+                        <label for="title" class="form-label">@lang('Title')</label>
+                        <input type="text" class="form-control" id="title" name="title"
+                            value="{{ old('title') }}" placeholder="Enter Title" aria-describedby="title"
+                            tabindex="2" />
+                    </div>
+
+                </div>
+                <div class="row">
+                    <div class="mb-1 col-6">
+                        <label for="city" class="form-label">@lang('City')</label>
+                        <input type="text" class="form-control" id="city" name="city"
+                            value="{{ old('city') }}" placeholder="Enter City" aria-describedby="city"
+                            tabindex="1" autofocus />
+                    </div>
+                    <div class="mb-1 col-6">
+                        <label for="state" class="form-label">@lang('State')</label>
+                        <input type="text" class="form-control" id="state" name="state"
+                            value="{{ old('state') }}" placeholder="Enter State" aria-describedby="state"
+                            tabindex="2" />
+                    </div>
+
+                </div>
 
                 <div class="row">
                     <div class="mb-1 col-6">
@@ -65,7 +95,95 @@
                     <input type="hidden" id="code" name="country_codes">
 
                 </div>
+                <div class="mb-1">
+                <div class="d-flex flex-column">
+              <label class="form-check-label" for="customSwitch3">Is your business currently operational?</label>
+              <div class="demo-inline-spacing">
+            <div class="form-check form-check-inline">
+              <input
+                class="form-check-input"
+                type="radio"
+                name="chargepay"
+                id="inlineRadio1"
+                value="1" checked
 
+              />
+              <label class="form-check-label" for="inlineRadio1">Yes</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input
+                class="form-check-input"
+                type="radio"
+                name="chargepay"
+                id="inlineRadio2"
+                value="2" checked
+              />
+              <label class="form-check-label" for="inlineRadio2">No</label>
+            </div>
+            </div>
+            <div class="row additional mt-1">
+                    <div class="mb-1 col-12">
+                        <label for="expectoperational" class="form-label">@lang('When do you expect to be operational??')</label>
+                        <input type="text" class="form-control" id="expectoperational" name="expectoperational"
+                            value="{{ old('expectoperational') }}" placeholder="Please Enter" aria-describedby="expectoperational"
+                            tabindex="1" autofocus />
+                    </div>
+
+                </div>
+                <div class="row mt-1">
+                    <div class="mb-1 col-12">
+                        <label for="howhear" class="form-label">@lang('How did you hear about PayMeNow?')</label>
+                        <input type="text" class="form-control" id="howhear" name="howhear"
+                            value="{{ old('howhear') }}" placeholder="Enter First Name" aria-describedby="howhear"
+                            tabindex="1" autofocus />
+                    </div>
+
+                </div>
+                <div class="row">
+                   
+                    <div class="mb-1 col-6">
+                        <label for="referral" class="form-label">@lang('Referral code (optional)')</label>
+                        <input type="text" class="form-control" id="referral" name="referral"
+                            value="{{ old('referral') }}" placeholder="Enter First Name" aria-describedby="referral"
+                            tabindex="1" autofocus />
+                    </div>
+                    <div class="mb-1 col-6">
+                        <label for="businesstype" class="form-label">@lang('Business Type')</label>
+                        <input type="text" class="form-control" id="businesstype" name="businesstype"
+                            value="{{ old('businesstype') }}" placeholder="Enter Business Type" aria-describedby="businesstype"
+                            tabindex="1" autofocus />
+                    </div>
+                </div>
+                
+                <div class="row">
+                   
+                   <div class="mb-1 col-12">
+                   <label class="form-check-label" for="accounttype">
+                                @lang('Which type of account are you applying for? (select all that apply)')
+                            </label>
+                   </div>
+               </div>
+                <div class="mb-1">
+                        <div class="form-check">
+                            <input class="form-check-input" name="agree" type="checkbox" id="premier-account"
+                                tabindex="4" />
+                            <label class="form-check-label" for="premier-account">
+                                @lang('Premier Account - pay vendors, utilities, taxes and employees.')
+                            </label>
+                        </div>
+                        </div>
+
+                <div class="mb-1">
+
+                        <div class="form-check">
+                            <input class="form-check-input" name="agree" type="checkbox" id="paytender-account"
+                                tabindex="4" />
+                            <label class="form-check-label" for="paytender-account">
+                                @lang('Paytender Account -  accept customer payments.  ')
+                            </label>
+                        </div>
+                        </div>
+                
                 <div class="mb-1">
                     <label for="register-username" class="form-label">{{ __('Username') }}</label>
                     <input type="text" class="form-control" id="username" name="username" placeholder="Enter Username"
@@ -117,6 +235,8 @@
                         <br><br>
                         <button class="btn btn--primary text-white w-100" type="submit"
                             tabindex="5">@lang('Register')</button>
+                            </div>
+
             </form>
 
             <p class="text-center mt-2">
@@ -135,4 +255,15 @@
 @push('script-lib')
     <script src="{{ asset('assets/global/js/secure_password.js') }}"></script>
     <script src="{{ asset($activeTemplateTrue . 'app-assets/js/scripts/pages/page-auth-register.min.js') }}"></script>
+    <script>
+          $('input[type="radio"]').click(function(){
+        var inputValue = $(this).attr("value");
+        if (inputValue == 2) {
+        $("." + 'additional').toggle();
+        }else{
+        $("." + 'additional').hide();
+
+        }
+    });
+        </script>
 @endpush

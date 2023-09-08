@@ -411,6 +411,10 @@ Route::name('user.')->group(function () {
             Route::get('suport/download/{id}', 'UserController@ticketDownload')->name('ticket.download');
             Route::get('suport/delete/{id}', 'UserController@ticketDelete')->name('ticket.delete');
 
+             //Notification
+        Route::get('notifications', 'UserController@notifications')->name('notifications');
+        Route::get('notification/read/{id}', 'UserController@notificationRead')->name('notification.read');
+        Route::get('notifications/read-all', 'UserController@readAll')->name('notifications.readAll');
             //Loan
             Route::get('/request/loan', 'LoanController@requestloan')->name('loan.request');
             Route::post('/request/loan', 'LoanController@requestsubmit');

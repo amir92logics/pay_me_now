@@ -605,11 +605,11 @@ class ManageUsersController extends Controller
                     }
                 }
                 $admin = Auth::guard('admin')->user();
-                // dd($admin);
+                // dd($ticket->user_id);
                 $adminNotification = new AdminNotification();
-                $adminNotification->user_id = $admin->id;
-                $adminNotification->title = 'New support ticket from '.$admin->name;
-                $adminNotification->click_url = urlPath('user.ticket.view',$ticket->id);
+                $adminNotification->user_id = $id;
+                $adminNotification->title = 'Reply on support ticket from '.$admin->name;
+                $adminNotification->click_url = urlPath('user.ticket.view',$ticket->ticket);
                 $adminNotification->save();
 
                  $notify[] = ['success', 'Support ticket replied successfully!'];

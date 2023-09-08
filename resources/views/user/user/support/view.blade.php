@@ -114,7 +114,7 @@
     <!-- User Chat messages -->
     @if($my_ticket->status != 3)
     <!-- Submit Chat form -->
-    <form class="chat-app-form" onsubmit="enterChat();" method="post" action="{{ route('user.ticket.reply', $my_ticket->id) }}"">
+    <form class="chat-app-form"  method="post" action="{{ route('user.ticket.reply', $my_ticket->id) }}"">
     @csrf
       <div class=" input-group input-group-merge me-1 form-send-message">
 
@@ -131,7 +131,7 @@
           <input type="file" id="attach-doc" hidden /> </label>
       </span>
   </div>
-  <button type="submit" class="btn text-white btn--primary send" onclick="enterChat();">
+  <button type="submit" class="btn text-white btn--primary send" onclick="enterChat()f;">
     <i data-feather="send" class="d-lg-none"></i>
     <span class="d-none d-lg-block">Send</span>
   </button>

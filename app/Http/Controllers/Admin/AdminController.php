@@ -193,10 +193,15 @@ class AdminController extends Controller
 
     public function notificationRead($id){
         // dd('dsfad', $id);
+        
         $notification = AdminNotification::findOrFail($id);
+        if (str_contains($notification->click_url, 'admin')) {
         $notification->read_status = 1;
         $notification->save();
-        return redirect($notification->click_url);
+            return redirect($notification->click_url);
+        } else {
+            return abort(404);
+        }
     }
 
     public function readAll(){

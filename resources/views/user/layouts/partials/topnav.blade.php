@@ -39,7 +39,6 @@
                     data-bs-toggle="dropdown"><i class=" text-white ficon" data-feather="bell"></i>
                     @if ($userNotifications->count() > 0)
                         <span class="badge rounded-pill bg-danger badge-up">{{ $userNotifications->count() }}</span>
-                        <span class="badge rounded-pill bg-danger badge-up"></span>
                     @endif
                 </a>
                 <ul class="dropdown-menu dropdown-menu-media dropdown-menu-end">
@@ -54,7 +53,7 @@
                         </div>
                     </li>
                     @foreach ($userNotifications as $notification)
-                        <li class="scrollable-container media-list"><a class="d-flex"  href="{{ route('admin.notification.read', $notification->id) }}">
+                        <li class="scrollable-container media-list"><a class="d-flex"  href="{{ route('user.notification.read', $notification->id) }}">
 
                             <div class="list-item d-flex align-items-start">
                                 <div class="me-1">
@@ -70,7 +69,7 @@
                                     <small class="notification-text">{{ $notification->created_at->diffForHumans() }}.</small>
                                 </div>
                             </div>
-                            </a><a class="d-flex" href="{{ route('admin.notification.read', $notification->id) }}">
+                            </a><a class="d-flex" href="{{ route('user.notification.read', $notification->id) }}">
                         </li>
                     @endforeach
                 </ul>
