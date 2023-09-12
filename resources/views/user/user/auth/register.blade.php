@@ -64,7 +64,7 @@
                 </div>
 
                 <div class="row">
-                    <div class="mb-1 col-6">
+                    <!-- <div class="mb-1 col-6">
                         <label for="currency" class="form-label">{{ __('Country') }}</label>
                         <select name="country" id="currency" onchange="myFunction()" required class="form-control">
                             @foreach ($countries as $key => $country)
@@ -83,8 +83,8 @@
                                 document.getElementById("22").innerHTML = "+" + mobile_code;
                             };
                         </script>
-                    @endpush
-                    <div class="mb-1 col-6">
+                    @endpush -->
+                    <div class="mb-1 col-12">
                         <label for="firstname" class="form-label">@lang('Mobile')</label>
                         <input name="mobile" id="mobile" class="form-control" id="mobile"
                             value="{{ old('mobile') }}" placeholder="Phone Number" aria-describedby="mobile" tabindex="1"
@@ -123,7 +123,7 @@
             </div>
             <div class="row additional mt-1">
                     <div class="mb-1 col-12">
-                        <label for="expectoperational" class="form-label">@lang('When do you expect to be operational??')</label>
+                        <label for="expectoperational" class="form-label">@lang('When do you expect to be operational?')</label>
                         <input type="text" class="form-control" id="expectoperational" name="expectoperational"
                             value="{{ old('expectoperational') }}" placeholder="Please Enter" aria-describedby="expectoperational"
                             tabindex="1" autofocus />
@@ -132,7 +132,7 @@
                 </div>
                 <div class="row mt-1">
                     <div class="mb-1 col-12">
-                        <label for="howhear" class="form-label">@lang('How did you hear about PayMeNow?')</label>
+                        <label for="howhear" class="form-label">@lang('How did you hear about PayMeNow (optional) ?')</label>
                         <input type="text" class="form-control" id="howhear" name="howhear"
                             value="{{ old('howhear') }}" placeholder="Enter First Name" aria-describedby="howhear"
                             tabindex="1" autofocus />
@@ -165,15 +165,15 @@
                </div>
                 <div class="mb-1">
                         <div class="form-check">
-                            <input class="form-check-input" name="agree" type="checkbox" id="premier-account"
-                                tabindex="4" />
+                            <input class="form-check-input" checked name="agree" type="checkbox" id="premier-account"
+                                tabindex="4" onclick="return false;" />
                             <label class="form-check-label" for="premier-account">
                                 @lang('Premier Account - pay vendors, utilities, taxes and employees.')
                             </label>
                         </div>
                         </div>
 
-                <div class="mb-1">
+                <!-- <div class="mb-1">
 
                         <div class="form-check">
                             <input class="form-check-input" name="agree" type="checkbox" id="paytender-account"
@@ -182,7 +182,7 @@
                                 @lang('Paytender Account -  accept customer payments.  ')
                             </label>
                         </div>
-                        </div>
+                        </div> -->
                 
                 <div class="mb-1">
                     <label for="register-username" class="form-label">{{ __('Username') }}</label>
