@@ -81,6 +81,8 @@ class RegisterController extends Controller
 
     public function register(Request $request)
     {
+        // dd($request);
+
         $validator = $this->validator($request->all());
         if ($validator->fails()) {
             return response()->json([
@@ -144,14 +146,22 @@ class RegisterController extends Controller
         $user->password = Hash::make($data['password']);
         $user->username = trim($data['username']);
         $user->ref_by = $referUser ? $referUser->id : 0;
-        $user->country_code = $data['country_code'];
+        // $user->country_code = $data['country_code'];
+        $user->title = $data['title'];
+        $user->business_status = $data['business_status'];
+        $user->business_name = $data['legalbusinessname'];
+        $user->when_operational = $data['expectoperational'];
+        $user->how_hear = $data['howhear'];
+        $user->referral_code = $data['referral'];
+        $user->business_type = $data['businesstype'];        
+        $user->account_type = 1;
         $user->mobile = $data['mobile_code'].$data['mobile'];
         $user->address = [
             'address' => '',
-            'state' => '',
+            'state' => $data['state'],
             'zip' => '',
-            'country' => isset($data['country']) ? $data['country'] : null,
-            'city' => ''
+            // 'country' => isset($data['country']) ? $data['country'] : null,
+            'city' => $data['city']
         ];
         $user->status = 1;
         $user->ev = $general->ev ? 0 : 1;

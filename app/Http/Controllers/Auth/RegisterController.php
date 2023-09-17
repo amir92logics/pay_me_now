@@ -71,7 +71,7 @@ class RegisterController extends Controller
         $countryData = (array)json_decode(file_get_contents(resource_path('views/partials/country.json')));
         $countryCodes = implode(',', array_keys($countryData));
         $mobileCodes = implode(',',array_column($countryData, 'dial_code'));
-        $countries = implode(',',array_column($countryData, 'country'));
+        // $countries = implode(',',array_column($countryData, 'country'));
         $validate = Validator::make($data, [
             'firstname' => 'sometimes|required|string|max:50',
             'lastname' => 'sometimes|required|string|max:50',
@@ -80,7 +80,14 @@ class RegisterController extends Controller
             'password' => ['required','confirmed',$password_validation],
             'username' => 'required|alpha_num|unique:users|min:6',
             'captcha' => 'sometimes|required',
-            'country' => 'required|in:'.$countries,
+            // 'country' => 'required|in:'.$countries,
+            'state' => 'sometimes|required|string|max:50',
+            'city' => 'sometimes|required|string|max:50',
+            'legalbusinessname' => 'sometimes|required|string|max:50',
+            'title' => 'sometimes|required|string|max:50',
+            'businesss_status' => 'sometimes|required|string|max:50',
+            'referral' => 'sometimes|required|string|max:50',
+            'accounttype' => 'sometimes|required|string|max:50',
             'agree' => $agree
         ]);
         return $validate;
@@ -88,6 +95,8 @@ class RegisterController extends Controller
 
     public function register(Request $request)
     {
+        // dd("req",$request);
+
         $this->validator($request->all())->validate();
         $exist = User::where('mobile',$request->mobile_code.$request->mobile)->first();
         if ($exist) {
@@ -112,6 +121,7 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+        // dd("req",$data);   
 
         $general = GeneralSetting::first();
 
@@ -129,16 +139,23 @@ class RegisterController extends Controller
         $user->email = strtolower(trim($data['email']));
         $user->password = Hash::make($data['password']);
         $user->username = trim($data['username']);
-        $user->account_number = mt_rand(1000000000, 9999999999);
+        // $user->account_number = mt_rand(1000000000, 9999999999);
         $user->ref_by = $referUser ? $referUser->id : 0;
-        $user->country_code = $data['country_codes'];
-        $user->mobile = $data['mobile_codes'].$data['mobile'];
+        $user->title = $data['title'];
+        $user->business_status = 1;
+        $user->business_name = $data['legalbusinessname'];
+        $user->when_operational = $data['expectoperational'];
+        $user->how_hear = $data['howhear'];
+        $user->referral_code = $data['referral'];
+        $user->business_type = $data['businesstype'];        
+        $user->account_type = 1;
+        $user->mobile = $data['mobile_code'].$data['mobile'];
         $user->address = [
             'address' => '',
-            'state' => '',
+            'state' => $data['state'],
             'zip' => '',
-            'country' => isset($data['country']) ? $data['country'] : null,
-            'city' => ''
+            // 'country' => isset($data['country']) ? $data['country'] : null,
+            'city' => $data['city']
         ];
         $user->status = 1;
         $user->ev = $general->ev ? 0 : 1;

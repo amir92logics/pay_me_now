@@ -37,13 +37,13 @@
                         <label for="legalbusinessname" class="form-label">@lang('Legal Business Name')</label>
                         <input type="text" class="form-control" id="legalbusinessname" name="legalbusinessname"
                             value="{{ old('legalbusinessname') }}" placeholder="Enter Legal Business Name" aria-describedby="legalbusinessname"
-                            tabindex="1" autofocus />
+                            tabindex="3" autofocus />
                     </div>
                     <div class="mb-1 col-6">
                         <label for="title" class="form-label">@lang('Title')</label>
                         <input type="text" class="form-control" id="title" name="title"
                             value="{{ old('title') }}" placeholder="Enter Title" aria-describedby="title"
-                            tabindex="2" />
+                            tabindex="4" />
                     </div>
 
                 </div>
@@ -52,13 +52,14 @@
                         <label for="city" class="form-label">@lang('City')</label>
                         <input type="text" class="form-control" id="city" name="city"
                             value="{{ old('city') }}" placeholder="Enter City" aria-describedby="city"
-                            tabindex="1" autofocus />
-                    </div>
+                            tabindex="5" autofocus />
+                    </div>"
+                            
                     <div class="mb-1 col-6">
                         <label for="state" class="form-label">@lang('State')</label>
                         <input type="text" class="form-control" id="state" name="state"
-                            value="{{ old('state') }}" placeholder="Enter State" aria-describedby="state"
-                            tabindex="2" />
+                        value="{{ old('state') }}" placeholder="Enter State" aria-describedby="state"
+                            tabindex="6" />
                     </div>
 
                 </div>
@@ -87,46 +88,45 @@
                     <div class="mb-1 col-12">
                         <label for="firstname" class="form-label">@lang('Mobile')</label>
                         <input name="mobile" id="mobile" class="form-control" id="mobile"
-                            value="{{ old('mobile') }}" placeholder="Phone Number" aria-describedby="mobile" tabindex="1"
+                            value="{{ old('mobile') }}" placeholder="Phone Number" aria-describedby="mobile" tabindex="7"
                             autofocus />
                     </div>
 
-                    <input type="hidden" id="mobile_code" name="mobile_codes">
-                    <input type="hidden" id="code" name="country_codes">
+                    <input type="hidden" id="mobile_code" name="mobile_code" value="+1">
+                    <!-- <input type="hidden" id="code" name="country_codes"> -->
 
                 </div>
                 <div class="mb-1">
                 <div class="d-flex flex-column">
-              <label class="form-check-label" for="customSwitch3">Is your business currently operational?</label>
+              <label class="form-check-label" for="customSwitch3" >Is your business currently operational?</label>
               <div class="demo-inline-spacing">
             <div class="form-check form-check-inline">
               <input
                 class="form-check-input"
                 type="radio"
                 name="chargepay"
-                id="inlineRadio1"
-                value="1" checked
-
+                id="businesss_status"
+                value="0"
               />
-              <label class="form-check-label" for="inlineRadio1">Yes</label>
+              <label class="form-check-label" for="businesss_status">Yes</label>
             </div>
             <div class="form-check form-check-inline">
               <input
                 class="form-check-input"
                 type="radio"
                 name="chargepay"
-                id="inlineRadio2"
-                value="2" checked
+                id="businesss_status"
+                value="1" checked
               />
-              <label class="form-check-label" for="inlineRadio2">No</label>
+              <label class="form-check-label" for="businesss_status">NO</label>
             </div>
             </div>
-            <div class="row additional mt-1">
+            <div class="row additional mt-1 box-additional">
                     <div class="mb-1 col-12">
                         <label for="expectoperational" class="form-label">@lang('When do you expect to be operational?')</label>
                         <input type="text" class="form-control" id="expectoperational" name="expectoperational"
                             value="{{ old('expectoperational') }}" placeholder="Please Enter" aria-describedby="expectoperational"
-                            tabindex="1" autofocus />
+                            tabindex="8" autofocus />
                     </div>
 
                 </div>
@@ -135,23 +135,24 @@
                         <label for="howhear" class="form-label">@lang('How did you hear about PayMeNow (optional) ?')</label>
                         <input type="text" class="form-control" id="howhear" name="howhear"
                             value="{{ old('howhear') }}" placeholder="Enter First Name" aria-describedby="howhear"
-                            tabindex="1" autofocus />
+                            tabindex="9" autofocus />
                     </div>
 
                 </div>
+
                 <div class="row">
                    
                     <div class="mb-1 col-6">
                         <label for="referral" class="form-label">@lang('Referral code (optional)')</label>
                         <input type="text" class="form-control" id="referral" name="referral"
                             value="{{ old('referral') }}" placeholder="Enter First Name" aria-describedby="referral"
-                            tabindex="1" autofocus />
+                            tabindex="10" autofocus />
                     </div>
                     <div class="mb-1 col-6">
                         <label for="businesstype" class="form-label">@lang('Business Type')</label>
                         <input type="text" class="form-control" id="businesstype" name="businesstype"
                             value="{{ old('businesstype') }}" placeholder="Enter Business Type" aria-describedby="businesstype"
-                            tabindex="1" autofocus />
+                            tabindex="11" autofocus />
                     </div>
                 </div>
                 
@@ -166,7 +167,7 @@
                 <div class="mb-1">
                         <div class="form-check">
                             <input class="form-check-input" checked name="agree" type="checkbox" id="premier-account"
-                                tabindex="4" onclick="return false;" />
+                                tabindex="12" onclick="return false;" />
                             <label class="form-check-label" for="premier-account">
                                 @lang('Premier Account - pay vendors, utilities, taxes and employees.')
                             </label>
@@ -187,12 +188,12 @@
                 <div class="mb-1">
                     <label for="register-username" class="form-label">{{ __('Username') }}</label>
                     <input type="text" class="form-control" id="username" name="username" placeholder="Enter Username"
-                        aria-describedby="username" tabindex="1" autofocus />
+                        aria-describedby="username" tabindex="13" autofocus />
                 </div>
                 <div class="mb-1">
                     <label for="register-email" class="form-label">@lang('E-Mail Address')</label>
                     <input type="email" class="form-control" id="email" name="email" placeholder="example@email.com"
-                        aria-describedby="email" value="{{ request('email') ?? old('email') }}" tabindex="2" {{ request('email') ? 'readonly':'' }}/>
+                        aria-describedby="email" value="{{ request('email') ?? old('email') }}" tabindex="14" {{ request('email') ? 'readonly':'' }}/>
                 </div>
 
                 <div class="row">
@@ -202,7 +203,7 @@
                         <div class="input-group input-group-merge form-password-toggle">
                             <input type="password" class="form-control form-control-merge" id="password" name="password"
                                 placeholder="Enter Password
-                aria-describedby="password" tabindex="3" />
+                aria-describedby="password" tabindex="14" />
                             <span class="input-group-text cursor-pointer bg-light text-black"><i
                                     data-feather="eye"></i></span>
                         </div>
@@ -258,7 +259,7 @@
     <script>
           $('input[type="radio"]').click(function(){
         var inputValue = $(this).attr("value");
-        if (inputValue == 2) {
+        if (inputValue == 1) {
         $("." + 'additional').toggle();
         }else{
         $("." + 'additional').hide();
