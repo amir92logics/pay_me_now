@@ -53,7 +53,7 @@
                         <input type="text" class="form-control" id="city" name="city"
                             value="{{ old('city') }}" placeholder="Enter City" aria-describedby="city"
                             tabindex="5" autofocus />
-                    </div>"
+                    </div>
                             
                     <div class="mb-1 col-6">
                         <label for="state" class="form-label">@lang('State')</label>

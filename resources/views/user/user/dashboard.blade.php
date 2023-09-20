@@ -43,7 +43,7 @@
                                     <i data-feather='arrow-up'></i>
                                     {{ __('Bill Pay') }}
                                 </a>
-                                <a href="" class="btn btn-relief-success d-block d-sm-inline-block mt-1 mt-lg-0">
+                                <a href="{{ route('user.withdraw-methods.index') }}" class="btn btn-relief-success d-block d-sm-inline-block mt-1 mt-lg-0">
                                     <i data-feather='arrow-down'></i>
                                     {{ __('Cash Out') }}
                                 </a>
@@ -51,14 +51,14 @@
                                     <i data-feather='credit-card'></i>
                                     {{ __('Send Fund') }}
                                 </a>
-                                <a href="" class="btn btn-relief-success d-block d-sm-inline-block mt-1 mt-lg-0">
+                                <!-- <a href="" class="btn btn-relief-success d-block d-sm-inline-block mt-1 mt-lg-0">
                                     <i data-feather='plus-circle'></i>
                                     {{ __('Add Sub Account') }}
                                 </a>
                                 <a href="" class="btn btn-relief-success d-block d-sm-inline-block mt-1 mt-lg-0">
                                     <i data-feather='list'></i>
                                     {{ __('Sub Account List') }}
-                                </a>
+                                </a> -->
                                 {{-- <a href="{{ route('user.usertransfer') }}" class="btn btn-light">
 
                                 </a>
@@ -129,7 +129,7 @@
                 <div class="col-xl-4 col-md-6 col-12">
                     <div class="card card-primary">
                         <div class="card-body">
-                            <h5> <b>@lang('Total Available Balance')</b></h5>
+                            <h5> <b>@lang('Premier Account Balance')</b></h5>
                             <h3 class="mb-75 mt-2 pt-50">
                                 <a href="#"> {{ $general->cur_sym }} {{ showAmount($user->balance) }}</a>
                             </h3>
@@ -150,7 +150,7 @@
                             <div class="col-md-8 col-12">
                                  <h5> <b>@lang('Pending Balance')</b></h5>
                             <h3 class="mb-75 mt-2 pt-30">
-                            <a href="#"> {{ $general->cur_sym }}  {{$pendingDeposit}}</a>
+                            <a href="#"> {{ $general->cur_sym }}  {{ showAmount($pendingDeposit) }}</a>
                             </h3>
                                 </div>
                                 <div class="col-md-4 col-12">
@@ -170,7 +170,31 @@
                         </div>
                     </div>
                 </div>
-
+                <div class="col-4">
+                    <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-body pb-50">
+                            <h6>Saving Account</h6>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-body pb-50">
+                            <h6>Sub Saving Account</h6>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-body pb-50">
+                            <h6>Other Account</h6>
+                        </div>
+                    </div>
+                </div>
+                </div>
+                </div>
                 {{-- @if ($loan || $bal) --}}
                 <div class="col-md-2 col-6">
                     <div class="card">

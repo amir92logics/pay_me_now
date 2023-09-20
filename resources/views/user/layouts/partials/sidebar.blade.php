@@ -96,15 +96,15 @@
 
             <li class="nav-item"><a class="d-flex align-items-center" href="#"><i
                         data-feather="shopping-bag"></i><span class="menu-title text-truncate"
-                        data-i18n="Invoice">@lang('Sub Savings')</span></a>
+                        data-i18n="Invoice">@lang('Liquid Cash Account')</span></a>
                 <ul class="menu-content">
                     <li class="@if (\Route::current()->getName() == 'user.subsaving.index') active @endif"><a class="d-flex align-items-center"
                             href="{{ route('user.subsaving.index') }}"><i data-feather="circle"></i><span
-                                class="menu-item text-truncate" data-i18n="List">@lang('SubSaving Accounts')</span></a>
+                                class="menu-item text-truncate" data-i18n="List">@lang('Other Accounts')</span></a>
                     </li>
                     <li class="@if (\Route::current()->getName() == 'user.subsaving.create') active @endif"><a class="d-flex align-items-center"
                             href="{{ route('user.subsaving.create') }}"><i data-feather="circle"></i><span
-                                class="menu-item text-truncate" data-i18n="Preview">@lang('New SubSaving Account')</span></a>
+                                class="menu-item text-truncate" data-i18n="Preview">@lang('New LCA Account')</span></a>
                     </li>
 
                 </ul>
