@@ -104,7 +104,7 @@
                     </li>
                     <li class="@if (\Route::current()->getName() == 'user.subsaving.create') active @endif"><a class="d-flex align-items-center"
                             href="{{ route('user.subsaving.create') }}"><i data-feather="circle"></i><span
-                                class="menu-item text-truncate" data-i18n="Preview">@lang('New LCA Account')</span></a>
+                                class="menu-item text-truncate" data-i18n="Preview">@lang('New LC Account')</span></a>
                     </li>
 
                 </ul>

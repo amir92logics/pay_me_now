@@ -20,7 +20,7 @@
             <div class="bs-stepper-content">
                 <div id="account-details" class="" role="tabpanel" aria-labelledby="account-details-trigger">
                     <div class="content-header mb-1">
-                        <h5 class="">New Sub Saving Account</h5>
+                        <h5 class="">New Liquid Cash Account</h5>
                         <!-- <small class="text-muted"></small> -->
                     </div>
 

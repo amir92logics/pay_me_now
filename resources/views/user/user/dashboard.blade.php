@@ -39,7 +39,7 @@
                                 {{-- <a href="{{ route('user.usertransfer') }}" class="btn btn-light">
 
                                 </a> --}}
-                                <a href="" class="btn btn-relief-success d-block d-sm-inline-block mt-1 mt-lg-0">
+                                <a href="{{ route('user.support') }}" class="btn btn-relief-success d-block d-sm-inline-block mt-1 mt-lg-0">
                                     <i data-feather='arrow-up'></i>
                                     {{ __('Bill Pay') }}
                                 </a>
@@ -148,7 +148,7 @@
                             @if ($pendingDeposit > 0)
                             <div class="row mt-4">
                             <div class="col-md-8 col-12">
-                                 <h5> <b>@lang('Pending Balance')</b></h5>
+                                 <h5> <b>@lang('Liquid Cash')</b></h5>
                             <h3 class="mb-75 mt-2 pt-30">
                             <a href="#"> {{ $general->cur_sym }}  {{ showAmount($pendingDeposit) }}</a>
                             </h3>
@@ -182,7 +182,7 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-body pb-50">
-                            <h6>Sub Saving Account</h6>
+                            <h6>Liquid Cash Account</h6>
                         </div>
                     </div>
                 </div>
@@ -340,7 +340,7 @@
                 @if (session('savings-close'))
                 <div class="col-12">
                     <div class="alert alert-primary alert-dismissible fade show p-1" role="alert">
-                        <h4 class="mb-1">{{ __('Sub Savings Account') }}</h4>
+                        <h4 class="mb-1">{{ __('Liquid Cashs Account') }}</h4>
                         <a class="btn btn-primary" href="{{ route('user.savingbalance') }}">{{ __('See All') }}</a>
                         <a class="btn btn-primary" href="{{ route('user.savings.request') }}">{{ __('Add New') }}</a>
                         <button type="button" class="btn-close savings-close text-light" data-bs-dismiss="alert" aria-label="Close"></button>

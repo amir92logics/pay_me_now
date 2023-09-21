@@ -17,8 +17,8 @@ class SubSavingAccountController extends Controller
 
     public function index()
     {
-        $pageTitle = "Sub Saving Accounts";
-        $emptyMessage = "You Don't Have Sub Saving Account";
+        $pageTitle = "Liquid Cash Accounts";
+        $emptyMessage = "You Don't Have Liquid Cash Account";
         $accounts = SubSavingAccount::where('user_id', auth()->id())->get();
         return view($this->activeTemplate . 'user.subsavingaccounts.index', compact('pageTitle', 'emptyMessage', 'accounts'));
     }
@@ -28,11 +28,11 @@ class SubSavingAccountController extends Controller
         $accounts = SubSavingAccount::where('user_id', auth()->id())->count();
         $accountsLimit = config('subsavingaccounts.accounts_limit');
         if ($accounts >= $accountsLimit) {
-            $notify[] = ['error', "You have reached the max Sub Saving Accounts Limit of $accountsLimit"];
+            $notify[] = ['error', "You have reached the max Liquid Cash Accounts Limit of $accountsLimit"];
             return redirect(route('user.home'))->withNotify($notify);
             exit();
         }
-        $pageTitle = 'New Sub Saving Account';
+        $pageTitle = 'New Liquid Cash Account';
         return view($this->activeTemplate . 'user.subsavingaccounts.create', compact('pageTitle'));
     }
 
@@ -41,7 +41,7 @@ class SubSavingAccountController extends Controller
         $accounts = SubSavingAccount::where('user_id', auth()->id())->count();
         $accountsLimit = config('subsavingaccounts.accounts_limit');
         if ($accounts >= $accountsLimit) {
-            $notify[] = ['error', "You have reached the max Sub Saving Accounts Limit of $accountsLimit"];
+            $notify[] = ['error', "You have reached the max Liquid Cash Accounts Limit of $accountsLimit"];
             return redirect(route('user.home'))->withNotify($notify);
             exit();
         }
@@ -76,7 +76,7 @@ class SubSavingAccountController extends Controller
     public function show(SubSavingAccount $subSavingAccount)
     {
         abort_unless(auth()->id() == $subSavingAccount->user_id, 404, "Page Not Found");
-        $pageTitle = "Sub Saving Account $subSavingAccount->name";
+        $pageTitle = "Liquid Cash Account $subSavingAccount->name";
         $emptyMessage = "No Transaction Happen In this Account";
         $transactions = SubSavingAccountLog::where('sub_saving_account_id', $subSavingAccount->id)->paginate(10);
         return view($this->activeTemplate . 'user.subsavingaccounts.show', compact('pageTitle', 'emptyMessage', 'subSavingAccount', 'transactions'));
@@ -85,7 +85,7 @@ class SubSavingAccountController extends Controller
 
     public function edit(SubSavingAccount $subSavingAccount)
     {
-        $pageTitle = "Sub Saving Accounts";
+        $pageTitle = "Liquid Cash Accounts";
         return view('user.user.subsavingaccounts.edit', compact('pageTitle', 'subSavingAccount'));
     }
 
@@ -119,7 +119,7 @@ class SubSavingAccountController extends Controller
             //     ]);
             // }
         });
-        $notify[] = ['success', "Sub Saving Account Updated"];
+        $notify[] = ['success', "Liquid Cash Account Updated"];
         return back()->withNotify($notify);
     }
 

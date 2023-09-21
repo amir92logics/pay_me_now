@@ -22,7 +22,7 @@
             <div class="bs-stepper-content">
                 <div id="account-details" class="" role="tabpanel" aria-labelledby="account-details-trigger">
                     <div class="content-header mb-1">
-                        <h5 class="">Your Sub Saving Account is
+                        <h5 class="">Your Liquid Cash Account is
                             @if($subSavingAccount->status == 1)
                             <span class="badge rounded-pill badge-light-success me-1">@lang('Enabled')</span>
                             @elseif($subSavingAccount->status == 0)

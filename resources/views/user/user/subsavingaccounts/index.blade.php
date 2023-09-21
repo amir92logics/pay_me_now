@@ -18,7 +18,7 @@
             </div>
             <div class="card-body">
                 <p class="card-text">
-                    @lang('Your Sub Savings Accounts').
+                    @lang('Your Liquid Cashs Accounts').
                 </p>
             </div>
             <div class="table-responsive">

@@ -18,7 +18,7 @@
             </div>
             <div class="card-body">
                 <p class="card-text">
-                    @lang('Your Sub Savings Transaction Log').
+                    @lang('Your Liquid Cashs Transaction Log').
                 </p>
             </div>
             <div class="table-responsive">

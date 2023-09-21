@@ -448,7 +448,7 @@ Route::name('user.')->group(function () {
             Route::post('/savings/{id}', 'SavingsController@savenow')->name('save.pay');
             Route::get('/saving-balance', 'SavingsController@savingbalance')->name('savingbalance');
 
-            // Sub Saving Account
+            // Liquid Cash Account
             Route::get('/subsavingaccounts', 'SubSavingAccountController@index')->name('subsaving.index');
             Route::get('/subsavingaccounts/create', 'SubSavingAccountController@create')->name('subsaving.create');
             Route::get('/subsavingaccounts/{subSavingAccount}/show', 'SubSavingAccountController@show')->name('subsaving.show');
