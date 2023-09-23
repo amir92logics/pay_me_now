@@ -106,10 +106,13 @@ class UserController extends Controller
         $paid = Loan::where('user_id', $user->id)->whereStatus(1)->whereStatus(1)->sum('paid');
         $bal = $loan - $paid;
         $saved = Savings::where('user_id', $user->id)->whereYear('created_at', $year)->sum('balance');
+        $SubSavingAccountBalance = SubSavingAccount::where('user_id', $user->id)->sum('amount');
 
         $dashboardSlides = DashboardSlide::all();
         $dashboardFooter = DashboardContent::where('data_key', '=', 'dashboard.footer')->get();
         $subSavingAccounts = SubSavingAccount::where('user_id', auth()->id())->get();
+        $subAccounts = SubSavingAccount::where('user_id', auth()->id())->count();
+
         return view($this->activeTemplate . 'user.dashboard', $data, compact(
             'pageTitle',
             'user',
@@ -121,6 +124,8 @@ class UserController extends Controller
             'dashboardSlides',
             'dashboardFooter',
             'subSavingAccounts',
+            'SubSavingAccountBalance',
+            'subAccounts',
             'pendingDeposit'
         ));
     }
