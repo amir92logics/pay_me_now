@@ -86,7 +86,6 @@ class RegisterController extends Controller
             'legalbusinessname' => 'sometimes|required|string|max:50',
             'title' => 'sometimes|required|string|max:50',
             'businesss_status' => 'sometimes|required|string|max:50',
-            'referral' => 'sometimes|required|string|max:50',
             'accounttype' => 'sometimes|required|string|max:50',
             'agree' => $agree
         ]);

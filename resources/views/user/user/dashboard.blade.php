@@ -21,116 +21,11 @@
         @endif
 
         <!-- Greetings Card starts -->
-        <div class="col-lg-12 col-md-12 col-sm-12 mt-1">
-            <div class="card card-congratulations">
-                <div class="card-body text-center">
-                    <img src="{{ asset($activeTemplateTrue . 'app-assets/images/elements/decore-left.png') }}"
-                        class="congratulations-img-left" alt="card-img-left" />
-                    <img src="{{ asset($activeTemplateTrue . 'app-assets/images/elements/decore-right.png') }}"
-                        class="congratulations-img-right" alt="card-img-right" />
-                    <div class="avatar avatar-xl bg-primary shadow">
-                        <div class="avatar-content">
-                            <img src="{{ getImage(imagePath()['logoIcon']['path'] . '/logo.png', '?' . time()) }}"
-                                alt="avatar" />
-                        </div>
-                    </div>
-                    <div class="text-center">
-                        <h1 class="mb-1 text-white">Welcome {{ Auth::user()->username }},</h1>
-                        {{-- <a href="{{ route('user.usertransfer') }}" class="btn btn-light">
-
-                        </a> --}}
-                        <a href="{{ route('user.support') }}"
-                            class="btn btn-relief-success d-block d-sm-inline-block mt-1 mt-lg-0">
-                            <i data-feather='arrow-up'></i>
-                            {{ __('Bill Pay') }}
-                        </a>
-                        <a href="{{ route('user.withdraw-methods.index') }}"
-                            class="btn btn-relief-success d-block d-sm-inline-block mt-1 mt-lg-0">
-                            <i data-feather='arrow-down'></i>
-                            {{ __('Cash Out') }}
-                        </a>
-                        <a href="{{ route('user.transfers.index') }}"
-                            class="btn btn-relief-success d-block d-sm-inline-block mt-1 mt-lg-0">
-                            <i data-feather='credit-card'></i>
-                            {{ __('Send Fund') }}
-                        </a>
-                        <!-- <a href="" class="btn btn-relief-success d-block d-sm-inline-block mt-1 mt-lg-0">
-                                    <i data-feather='plus-circle'></i>
-                                    {{ __('Add Sub Account') }}
-                                </a>
-                                <a href="" class="btn btn-relief-success d-block d-sm-inline-block mt-1 mt-lg-0">
-                                    <i data-feather='list'></i>
-                                    {{ __('Sub Account List') }}
-                                </a> -->
-                        {{-- <a href="{{ route('user.usertransfer') }}" class="btn btn-light">
-
-                        </a>
-                        <a href="{{ route('user.usertransfer') }}" class="btn btn-light">
-
-                        </a>
-                        <a href="{{ route('user.usertransfer') }}" class="btn btn-light">
-
-                        </a>
-                        <a href="{{ route('user.usertransfer') }}" class="btn btn-light">
-
-                        </a>
-                        <a href="{{ route('user.usertransfer') }}" class="btn btn-light">
-
-                        </a> --}}
-
-                        {{-- <div class="col-12">
-                                    <div class="card">
-                                        <div class="card-body">
-                                            <h4 class="font-weight-bold text-start text-primary"><b>{{ __('Quick Links') }}</b>
-                        </h4>
-                        <div class="d-flex flex-wrap">
-                            <div class="col-6 col-sm-4 col-md-2 mt-1 text-center mt-2">
-                                <a href="{{ route('user.usertransfer') }}" class="d-block text-primary">
-                                    <i class="w-30 h-30" data-feather='credit-card'></i>
-                                    <h5 class="mt-1 text-center">{{ __('Send Fund') }}</h5>
-                                </a>
-                            </div>
-                            <div class="col-6 col-sm-4 col-md-2 mt-1 text-center mt-2">
-                                <a href="" class="d-block text-primary">
-                                    <i class="w-30 h-30" data-feather='arrow-up'></i>
-                                    <h5 class="mt-1 text-center">{{ __('Bill Pay') }}</h5>
-                                </a>
-                            </div>
-                            <div class="col-6 col-sm-4 col-md-2 mt-1 text-center mt-2">
-                                <a href="" class="d-block text-primary">
-                                    <i class="w-30 h-30" data-feather='arrow-down'></i>
-                                    <h5 class="mt-1 text-center">{{ __('Cash Out') }}</h5>
-                                </a>
-                            </div>
-                            <div class="col-6 col-sm-4 col-md-2 mt-1 text-center mt-2">
-                                <a href="" class="d-block text-primary">
-                                    <i class="w-30 h-30" data-feather='list'></i>
-                                    <h5 class="mt-1 text-center">{{ __('Sub Account List') }}</h5>
-                                </a>
-                            </div>
-                            <div class="col-6 col-sm-4 col-md-2 mt-1 text-center mt-2">
-                                <a href="" class="d-block text-primary">
-                                    <i class="w-30 h-30" data-feather='plus-circle'></i>
-                                    <h5 class="mt-1 text-center">{{ __('Add Sub Account') }}</h5>
-                                </a>
-                            </div>
-                            <div class="col-6 col-sm-4 col-md-2 mt-1 text-center mt-2">
-                                <a href="" class="d-block text-primary">
-                                    <i class="w-30 h-30" data-feather='user'></i>
-                                    <h5 class="mt-1 text-center">{{ __('My Profile') }}</h5>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div> --}}
-        </div>
-    </div>
-    </div>
-    </div>
+      
     <!-- Greetings Card ends -->
+    {{-- <div class="row"> --}}
 
-    <div class="col-xl-4 col-md-6 col-12">
+    <div class=" col-md-6">
         <div class="card card-primary">
             <div class="card-body">
                 <h5> <b>@lang('Premier Account Balance')</b></h5>
@@ -153,38 +48,42 @@
                     </div>
                 </div>
                 @endif
+
+
                 @if ($pendingDeposit > 0)
                 <div class="row mt-4">
-                    <div class="col-md-8 col-12">
+                    <div class="col-12">
+                        
                         <h5> <b>@lang('Pending Deposit')</b></h5>
                         <h3 class="mb-75 mt-2 pt-30">
                             <a href="#"> {{ $general->cur_sym }} {{ showAmount($pendingDeposit) }}</a>
                         </h3>
+                        
                     </div>
-                    <div class="col-md-4 col-12">
-                        <div class="col-12 text-end">
-                            <button type="button" class="btn btn-dark btn-sm d-block float-end" data-bs-toggle="popover"
-                                data-bs-placement="top" data-bs-container="body" title=""
-                                data-bs-content="{{ Auth::user()->account_number }}"
-                                data-bs-original-title="Account No." aria-describedby="popover343370">
-                                <i data-feather='eye'></i>
-                            </button>
-                        </div>
-                        <div class="col-12 text-end">
-                            <a href="{{ route('user.deposits.index') }}"
-                                class="btn btn-primary float-end mt-1">{{ __('Deposit') }}</a>
-                        </div>
-                    </div>
-                    @endif
-
-
+                    
+                </div>
+                <div class="text-end">
+                    <div class="col-12 ">
+                        <button type="button" class="btn btn-dark btn-sm" data-bs-toggle="popover"
+                        data-bs-placement="top" data-bs-container="body" title=""
+                        data-bs-content="{{ Auth::user()->account_number }}"
+                        data-bs-original-title="Account No." aria-describedby="popover343370">
+                        <i data-feather='eye'></i>
+                    </button>
+                </div>
+                <div class="col-12">
+                    <a href="{{ route('user.deposits.index') }}"
+                    class="btn btn-primary mt-1">{{ __('Deposit') }}</a>
                 </div>
             </div>
-        </div>
+                @endif
+            </div>
+         </div>
     </div>
+
+    <div class=" col-md-6">
     @if ($subAccounts > 0)
 
-    <div class="col-4">
         <div class="card">
             <div class="card-body">
                 <div class="row ">
@@ -213,7 +112,7 @@
         <div class="card">
             <div class="card-body">
                 <div class="row ">
-                    <div class="col-6 ">
+                    <div class="col-10 ">
                         <h5> <b>@lang('Liquid Cash Account')</b></h5>
 
                         <h3 class="mb-75 mt-2 pt-50">
@@ -222,7 +121,7 @@
                         </h3>
                     </div>
 
-                    <div class="col-6">
+                    <div class="col-2">
                         <div class="col-12 text-end">
                             <button type="button" class="btn btn-dark btn-sm d-block float-end" data-bs-toggle="popover"
                                 data-bs-placement="top" data-bs-container="body" title=""
@@ -235,10 +134,46 @@
                 </div>
             </div>
         </div>
-    </div>
     @endif
+
+    @if ($subAccounts == 0)
+
+        <div class="row">
+
+            {{-- @if ($loan || $bal) --}}
+            <div class="col-md-6 col-12">
+                <div class="card">
+                    <div class="card-body pb-50">
+                        <h6>Active Loan</h6>
+                        <h4 class="fw-bolder mb-1">{{ $general->cur_sym }}{{ @number_format($loan, 2) }}</h4>
+                        <div id="statistics-order-chart"></div>
+                    </div>
+                </div>
+            </div>
+            <!--/ Bar Chart - Orders -->
+        
+            <!-- Line Chart - Profit -->
+            <div class="col-md-6 col-12">
+                <div class="card card-tiny-line-stats">
+                    <div class="card-body pb-50">
+                        <h6>Loan Balance</h6>
+                        <h4 class="fw-bolder mb-1">{{ $general->cur_sym }}{{ @number_format($bal, 2) }}</h4>
+                        <div id="statistics-profit-chart"></div>
+                    </div>
+                </div>
+            </div>
+            {{-- @endif --}}
+        </div>
+    @endif
+
+    {{-- </div> --}}
+</div>
+@if ($subAccounts > 0)
+
+{{-- <div class="row"> --}}
+
     {{-- @if ($loan || $bal) --}}
-    <div class="col-md-2 col-6">
+    <div class="col-md-6 col-12">
         <div class="card">
             <div class="card-body pb-50">
                 <h6>Active Loan</h6>
@@ -250,7 +185,7 @@
     <!--/ Bar Chart - Orders -->
 
     <!-- Line Chart - Profit -->
-    <div class="col-md-2 col-6">
+    <div class="col-md-6 col-12">
         <div class="card card-tiny-line-stats">
             <div class="card-body pb-50">
                 <h6>Loan Balance</h6>
@@ -260,9 +195,12 @@
         </div>
     </div>
     {{-- @endif --}}
-    </div>
+{{-- </div> --}}
+@endif
 
-    <div class="row match-height">
+</div>
+
+    {{-- <div class="row match-height">
         <div class="col-lg-5 col-12">
             <div class="row match-height">
                 <div class="col-lg-12 col-md-6 col-12">
@@ -304,7 +242,7 @@
             </div>
         </div>
         <!--/ Revenue Report Card -->
-    </div>
+    </div> --}}
 </section>
 <!-- Dashboard Ecommerce ends -->
 
@@ -457,7 +395,7 @@
         <div class="card">
             <div class="card-body">
                 <div class="row ">
-                    <div class="col-6 ">
+                    <div class="col-10 ">
                         <h5> <b>@lang('Liquid Cash Account')</b></h5>
 
                         <h3 class="mb-75 mt-2 pt-50">
@@ -466,7 +404,7 @@
                         </h3>
                     </div>
 
-                    <div class="col-6">
+                    <div class="col-2">
                         <div class="col-12 text-end">
                             <button type="button" class="btn btn-dark btn-sm d-block float-end" data-bs-toggle="popover"
                                 data-bs-placement="top" data-bs-container="body" title=""

@@ -98,7 +98,7 @@
                 </div>
                 <div class="mb-1">
                 <div class="d-flex flex-column">
-              <label class="form-check-label" for="customSwitch3" >Is your business currently operational?</label>
+              <label class="form-check-label" for="businesss_status" >Is your business currently operational?</label>
               <div class="demo-inline-spacing">
             <div class="form-check form-check-inline">
               <input
