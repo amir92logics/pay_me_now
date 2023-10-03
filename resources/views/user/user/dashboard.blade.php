@@ -28,6 +28,20 @@
     <div class=" col-md-4">
         <div class="card card-primary">
             <div class="card-body">
+                {{-- <div class="d-flex justify-content-between">
+                    <h6> <b>@lang('Premier Account Balance')</b></h6>
+                    <button type="button" class="btn btn-dark btn-sm d-block float-end" data-bs-toggle="popover"
+                            data-bs-placement="top" data-bs-container="body" title="asdasd"
+                            data-bs-content="{{ Auth::user()->account_number }}" data-bs-original-title="Account No."
+                            aria-describedby="popover343370">
+                            <i data-feather='eye'></i>
+                        </button>
+                    </div>
+                    <h3 class="pt-50 d-flex justify-content-between">
+                        <a href="#"> {{ $general->cur_sym }} {{ showAmount($user->balance) }}</a>
+                        <a href="{{ route('user.deposits.index') }}"
+                        class="btn btn-primary">{{ __('Deposit') }}</a>
+                    </h3> --}}
                 <h5> <b>@lang('Premier Account Balance')</b></h5>
                 <h3 class="mb-75 mt-2 pt-50">
                     <a href="#"> {{ $general->cur_sym }} {{ showAmount($user->balance) }}</a>
