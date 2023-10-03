@@ -25,7 +25,7 @@
     <!-- Greetings Card ends -->
     {{-- <div class="row"> --}}
 
-    <div class=" col-md-6">
+    <div class=" col-md-4">
         <div class="card card-primary">
             <div class="card-body">
                 <h5> <b>@lang('Premier Account Balance')</b></h5>
@@ -81,7 +81,7 @@
          </div>
     </div>
 
-    <div class=" col-md-6">
+    <div class=" col-md-4">
     @if ($subAccounts > 0)
 
         <div class="card">
@@ -173,7 +173,7 @@
 {{-- <div class="row"> --}}
 
     {{-- @if ($loan || $bal) --}}
-    <div class="col-md-6 col-12">
+    <div class="col-md-2 col-12">
         <div class="card">
             <div class="card-body pb-50">
                 <h6>Active Loan</h6>
@@ -185,7 +185,7 @@
     <!--/ Bar Chart - Orders -->
 
     <!-- Line Chart - Profit -->
-    <div class="col-md-6 col-12">
+    <div class="col-md-2 col-12">
         <div class="card card-tiny-line-stats">
             <div class="card-body pb-50">
                 <h6>Loan Balance</h6>
@@ -420,7 +420,7 @@
     </div>
     @endif
 
-    @if (session('savings-close'))
+    {{-- @if (session('savings-close'))
     <div class="col-12">
         <div class="alert alert-primary alert-dismissible fade show p-1" role="alert">
             <h4 class="mb-1">{{ __('Liquid Cashs Account') }}</h4>
@@ -430,7 +430,7 @@
                 aria-label="Close"></button>
         </div>
     </div>
-    @endif
+    @endif --}}
 
     @if ($loan || $bal)
     <div class="col-md-4 col-6">
