@@ -20,6 +20,7 @@
         <div class="card">
             <div class="card-body">
                 <div class="d-flex justify-content-between">
+                    <div>
                     <h4 class="card-title mb-1">{{ $method->name }}</h4>
                     @if ($method->usermethod)
                     <a class="text-warning" href="{{ route('user.withdraw-methods.show', $method->id) }}">
@@ -27,7 +28,10 @@
                     </a>
                     @endif
                 </div>
-                <img class="img-fluid" src="{{ asset('assets/images/withdraw/method/'.$method->image) }}" alt="Card image cap">
+                    <img class="round" height="30" src="{{ asset('assets/images/withdraw/method/'.$method->image) }}" alt="Card image cap">
+                
+            </div>
+                {{-- <img class="img-fluid" src="{{ asset('assets/images/withdraw/method/'.$method->image) }}" alt="Card image cap"> --}}
                 <table class="table mt-1">
                     <tr>
                         <th class="p-0">Charge</th>

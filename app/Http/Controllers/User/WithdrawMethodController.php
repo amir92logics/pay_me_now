@@ -18,7 +18,7 @@ class WithdrawMethodController extends Controller
     public function index()
     {
         $methods = WithdrawMethod::whereStatus(1)->with('usermethod')->latest()->get();
-        $pending_amount = Withdrawal::whereStatus(2)->whereUserId(auth()->id())->sum('amount');
+        $pending_amount = Withdrawal::whereStatus('pending')->whereUserId(auth()->id())->sum('amount');
         return view('user.user.withdraw.methods', compact('methods', 'pending_amount'));
     }
 

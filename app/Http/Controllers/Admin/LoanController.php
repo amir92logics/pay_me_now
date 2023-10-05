@@ -9,6 +9,7 @@ use App\Models\LoanPay;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\LoanPlan;
+use App\Models\LoanAttribute;
 
 class LoanController extends Controller
 {
@@ -200,15 +201,18 @@ class LoanController extends Controller
 
     public function view($id)
     {
+        
         $loan = Loan::whereReference($id)->with('user', 'plan')->first();
-        // dd($loan);
+        // dd($loan->load('attributes'));
         if (!$loan) {
             $notify[] = ['error', 'Invalid Loan Request.'];
             return back()->withNotify($notify);
         }
-
+        
         $pageTitle = 'View Loan';
         $plan = LoanPlan::where('id', $loan->plan_id)->where('status', 1)->first();
+        $loanAttiribute = LoanAttribute::where('loan_id', $loan->id)->first();
+        // dd($loanAttiribute);
         if (!$plan) {
             $notify[] = ['error', 'Invalid Loan Plan.'];
             return back()->withNotify($notify);
@@ -246,7 +250,7 @@ class LoanController extends Controller
 
         $pay = LoanPay::whereLoanId($id)->get();
         $sum = LoanPay::whereLoanId($id)->sum('amount');
-        return view('admin.loan.view', $data, compact('pageTitle', 'loan', 'pay', 'sum'));
+        return view('admin.loan.view', $data, compact('pageTitle', 'loan', 'pay', 'sum', 'loanAttiribute'));
     }
 
 

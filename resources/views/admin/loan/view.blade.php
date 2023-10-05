@@ -6,6 +6,9 @@
             <div class="card">
                 <div class="card-header">
                     <h4 class="text-primary">Loan details</h4>
+                    {{-- {{$loanAttiribute->data_value}} --}}
+                    <img class="round" height="50" width="50" src="{{ asset('loan_attachment/'.$loanAttiribute->data_value) }}" alt="Card image cap">
+
                 </div>
                 <div class="table-responsive mb-3">
                     <table class="table table-striped table-bordered">
@@ -19,19 +22,19 @@
                             <th>User Email</th>
                             <td>{{ $loan->user->email }}</td>
                             <th>Amount</th>
-                            <td>{{ $loan->amount }}</td>
+                            <td>{{showAmount($loan->amount) }}</td>
                         </tr>
                         <tr>
                             <th>Interest</th>
-                            <td>{{ $loan->interest }}</td>
+                            <td>{{ showAmount($loan->interest) }}</td>
                             <th>Total</th>
-                            <td>{{ $loan->total }}</td>
+                            <td>{{ showAmount($loan->total) }}</td>
                         </tr>
                         <tr>
                             <th>Penalty</th>
                             <td>{{ $loan->penalty }}</td>
                             <th>Paid</th>
-                            <td>{{ $loan->paid }}</td>
+                            <td>{{ showAmount($loan->paid) }}</td>
                         </tr>
                         <tr>
                             <th>Reference</th>
@@ -47,6 +50,11 @@
                                 @elseif($loan->status == 3)
                                     <span class="badge rounded-pill bg-light-danger me-1">@lang('Rejected')</span>
                                 @endif
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Image</th>
+                            <td>                    <img class="round" height="50" width="50" src="{{ asset('loan_attachment/'.$loanAttiribute->data_value) }}" alt="Card image cap">
                             </td>
                         </tr>
                     </table>
