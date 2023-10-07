@@ -6,7 +6,7 @@
             <div class="card b-radius--10 ">
                 <div class="card-header d-flex justify-content-between">
                     <h4 class="text-primary">{{ __("Saving plans list.") }}</h4>
-                    <a href="{{ route('admin.savings.plan.create') }}" class="btn btn-sm btn-primary"><i class="fa fa-fw fa-plus"></i><i data-feather='plus-circle'></i> @lang('Add New')</a>
+                    {{-- <a href="{{ route('admin.savings.plan.create') }}" class="btn btn-sm btn-primary"><i class="fa fa-fw fa-plus"></i><i data-feather='plus-circle'></i> @lang('Add New')</a> --}}
                 </div>
                 <div class="card-body p-0">
                     <div class="table-responsive--md  table-responsive">
