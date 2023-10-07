@@ -42,11 +42,16 @@
                         <a href="{{ route('user.deposits.index') }}"
                         class="btn btn-primary">{{ __('Deposit') }}</a>
                     </h3> --}}
-                <h5> <b>@lang('Premier Account Balance')</b></h5>
-                <h3 class="mb-75 mt-2 pt-50">
+                <h5> <b>@lang('Premier Account Balance')</b> <button type="button" class="btn btn-dark btn-sm d-block float-end" data-bs-toggle="popover"
+                    data-bs-placement="top" data-bs-container="body" title="asdasd"
+                    data-bs-content="{{ Auth::user()->account_number }}" data-bs-original-title="Account No."
+                    aria-describedby="popover343370">
+                    <i data-feather='eye'></i>
+                </button></h5>
+                <h2 class="mb-75 mt-2 pt-50">
                     <a href="#"> {{ $general->cur_sym }} {{ showAmount($user->balance) }}</a>
-                </h3>
-                @if ($pendingDeposit == 0)
+                </h2>
+                {{-- @if ($pendingDeposit == 0)
                 <div class="row mt-2">
                     <div class="col-12 text-end">
                         <button type="button" class="btn btn-dark btn-sm d-block float-end" data-bs-toggle="popover"
@@ -61,7 +66,7 @@
                             class="btn btn-primary text-end mt-1">{{ __('Deposit') }}</a>
                     </div>
                 </div>
-                @endif
+                @endif --}}
 
 
                 @if ($pendingDeposit > 0)
@@ -76,21 +81,38 @@
                     </div>
                     
                 </div>
-                <div class="text-end">
-                    <div class="col-12 ">
+                @endif
+            <div class="row">
+
+                <div class="col-6 col-md-12 col-lg-6">
+                    {{-- <div class="col-12">
                         <button type="button" class="btn btn-dark btn-sm" data-bs-toggle="popover"
                         data-bs-placement="top" data-bs-container="body" title=""
                         data-bs-content="{{ Auth::user()->account_number }}"
                         data-bs-original-title="Account No." aria-describedby="popover343370">
                         <i data-feather='eye'></i>
-                    </button>
+                        </button>
+                    </div> --}}
+                    <div class="col-12">
+                       <a href="{{ route('user.withdraw-methods.index') }}"
+                       class="btn btn-primary mt-1">{{ __('Withdraw') }}</a>
+                    </div>
                 </div>
+                <div class="col-6 text-end">
+                    {{-- <div class="col-12 ">
+                        <button type="button" class="btn btn-dark btn-sm" data-bs-toggle="popover"
+                        data-bs-placement="top" data-bs-container="body" title=""
+                        data-bs-content="{{ Auth::user()->account_number }}"
+                        data-bs-original-title="Account No." aria-describedby="popover343370">
+                        <i data-feather='eye'></i>
+                        </button>
+                    </div> --}}
                 <div class="col-12">
                     <a href="{{ route('user.deposits.index') }}"
                     class="btn btn-primary mt-1">{{ __('Deposit') }}</a>
                 </div>
             </div>
-                @endif
+        </div>
             </div>
          </div>
     </div>

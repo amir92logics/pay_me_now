@@ -28,7 +28,7 @@
                     </a>
                     @endif
                 </div>
-                    <img class="round" height="30" src="{{ asset('assets/images/withdraw/method/'.$method->image) }}" alt="Card image cap">
+                    <img height="30" src="{{ asset('assets/images/withdraw/method/'.$method->image) }}" alt="Card image cap">
                 
             </div>
                 {{-- <img class="img-fluid" src="{{ asset('assets/images/withdraw/method/'.$method->image) }}" alt="Card image cap"> --}}
@@ -38,7 +38,7 @@
                         <td class="p-0 text-end">${{ number_format($method->charge_type == 'percentage' ? $method->percent_charge:$method->fixed_charge, 2) }}</td>
                     </tr>
                 </table>
-                <div class="text-end mt-1">
+                <div class=" mt-1">
                     @if ($method->user_data && $method->usermethod && optional($method->usermethod)->withdraw_infos == null)
                         <a class="btn btn-warning rounded btn-sm" href="{{ route('user.withdraw-methods.show', $method->id) }}">
                             <i data-feather='edit'></i>
@@ -51,11 +51,18 @@
                         </div>
                     @endif
                     @if (!$method->usermethod)
-                        <a class="btn btn-primary btn-sm" href="{{ route('user.withdraw-methods.show', $method->id) }}">
+                    <a href="{{ route('user.make-withdraw', $method->id) }}" class="btn btn-primary btn-sm"><i data-feather='arrow-right-circle'></i></a>
+                        <a class="btn btn-primary btn-sm float-end" href="{{ route('user.withdraw-methods.show', $method->id) }}">
                             {{ __('Set up') }}
                         </a>
                     @endif
+                    {{-- @if (!$method->usermethod)
+                        <a class="btn btn-primary btn-sm" href="{{ route('user.withdraw-methods.show', $method->id) }}">
+                            {{ __('Set up') }}
+                        </a>
+                    @endif --}}
                 </div>
+                
             </div>
         </div>
     </div>
