@@ -236,8 +236,11 @@
 
 </div>
 
-    {{-- <div class="row match-height">
-        <div class="col-lg-5 col-12">
+    <div class="row text-end">
+        <div class="col-lg-3 col-12">
+        </div>
+
+            <div class="col-lg-6 col-12">
             <div class="row match-height">
                 <div class="col-lg-12 col-md-6 col-12">
                     <div class="bg-transparent card earnings-card shadow-none">
@@ -252,9 +255,13 @@
                 </div>
             </div>
         </div>
+        <div class="col-lg-3 col-12">
+
+    </div>
+</div>
 
         <!-- Revenue Report Card -->
-        <div class="col-lg-7 col-12 mb-1">
+        {{-- <div class="col-lg-7 col-12 mb-1">
             <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
                 <div class="carousel-inner">
                     @forelse($dashboardSlides as $dashboardSlide)
@@ -276,9 +283,9 @@
                     <span class="visually-hidden">Next</span>
                 </button>
             </div>
-        </div>
+        </div> --}}
         <!--/ Revenue Report Card -->
-    </div> --}}
+    {{-- </div> --}}
 </section>
 <!-- Dashboard Ecommerce ends -->
 
