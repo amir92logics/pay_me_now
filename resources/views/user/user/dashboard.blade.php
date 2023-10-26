@@ -236,7 +236,7 @@
 
 </div>
 
-    <div class="row text-end">
+    <div class="row text-center">
         <div class="col-lg-3 col-12">
         </div>
 
@@ -246,10 +246,15 @@
                     <div class="bg-transparent card earnings-card shadow-none">
                         <div class="row">
                             <div class="col-12">
+                            <div class="col-12">
+                                @foreach($dashboardImages as $dashboardImage)
+                                <a target="_blank" href="{{$dashboardImage->image_url}}">
                                 <img class="img-fluid"
                                     src="{{ getImage(imagePath()['dashboardSlide']['path'] . '/slide.png') }}"
                                     height="110" alt="logo">
-                            </div>
+                                </a>
+                    @endforeach
+                </div>
                         </div>
                     </div>
                 </div>

@@ -7,6 +7,7 @@ use App\Models\Frontend;
 use Illuminate\Http\Request;
 use App\Models\DashboardSlide;
 use App\Models\GeneralSetting;
+use App\Models\DashboardImage;
 use App\Rules\FileTypeValidate;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\File;
@@ -187,25 +188,52 @@ class GeneralSettingController extends Controller
 
     public function dashboardSlideUpdate(Request $request)
     {
-
+        
         $request->validate([
             'slide' => ['image', new FileTypeValidate(['jpg', 'jpeg', 'png'])],
-        ]);
+            'image_url' => 'required|string'
+        ],
+        [
+            'slide.required' => 'Please Upload Image.',
+            'image_url.required' => 'Please Enter image path.']
+    );
         if ($request->hasFile('slide')) {
-
+            
             try {
                 $path = imagePath()['dashboardSlide']['path'];
-                if (!file_exists($path)) {
-                    mkdir($path, 0755, true);
+                // if (!file_exists($path)) {
+                    // mkdir($path, 0755, true);
+                    // dd($path);
+                // }
+                // Image::make($request->slide)->save($path . '/slide5.png');
+                $dashboardImageCount = DashboardImage::count();
+                if($dashboardImageCount == 0){
+                $dashboardImage = new DashboardImage();
+                $dashboardImage->image_url = $request->image_url;
+                $dashboardImage->path = $path;
+                $dashboardImage->id = 1;
+                $dashboardImage->save();
+                // dd($path);
+            }else{
+                DashboardImage::where('id',1)->update(
+                    array(
+                            'image_url' => $request->image_url,
+                            'path' => $path !== ''  ? $path : ''
+                         )
+                    );
                 }
-                Image::make($request->slide)->save($path . '/slide.png');
+                $request->slide->move(public_path($path), '/slide.png');
+                $notify[] = ['success', 'Dashboard Slide Image has been updated.'];
+                return back()->withNotify($notify);
             } catch (\Exception $exp) {
-                $notify[] = ['error', 'Dashboard Slide Image could not be uploaded.'];
+                $notify[] =  ['error', 'Dashboard Slide Image could not be uploaded.'];
                 return back()->withNotify($notify);
             }
+        }else{
+            $notify[] = ['error', 'Dashboard Slide Image could not be uploaded.'];
+            return back()->withNotify($notify);
         }
-        $notify[] = ['success', 'Dashboard Slide Image has been updated.'];
-        return back()->withNotify($notify);
+       
     }
 
     public function cookie()

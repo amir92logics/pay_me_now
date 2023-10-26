@@ -24,6 +24,7 @@ use Illuminate\Mail\Mailer;
 use Illuminate\Http\Request;
 use App\Models\SupportTicket;
 use App\Models\DashboardSlide;
+use App\Models\DashboardImage;
 use App\Models\GeneralSetting;
 use App\Models\SupportMessage;
 use App\Models\WithdrawMethod;
@@ -109,6 +110,7 @@ class UserController extends Controller
         $SubSavingAccountBalance = SubSavingAccount::where('user_id', $user->id)->sum('amount');
 
         $dashboardSlides = DashboardSlide::all();
+        $dashboardImages = DashboardImage::all();
         $dashboardFooter = DashboardContent::where('data_key', '=', 'dashboard.footer')->get();
         $subSavingAccounts = SubSavingAccount::where('user_id', auth()->id())->get();
         $subAccounts = SubSavingAccount::where('user_id', auth()->id())->count();
@@ -122,6 +124,7 @@ class UserController extends Controller
             'saved',
             'bal',
             'dashboardSlides',
+            'dashboardImages',
             'dashboardFooter',
             'subSavingAccounts',
             'SubSavingAccountBalance',
