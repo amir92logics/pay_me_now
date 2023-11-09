@@ -73,6 +73,7 @@ class Kernel extends HttpKernel
         'admin.guest' => \App\Http\Middleware\RedirectIfAdmin::class,
 
         'regStatus' => \App\Http\Middleware\AllowRegistration::class,
+        'publicStatus' => \App\Http\Middleware\AllowPublicPages::class,
         'checkStatus' => \App\Http\Middleware\CheckStatus::class,
         'checkStatusApi' => \App\Http\Middleware\CheckStatusApi::class,
         'demo' => \App\Http\Middleware\Demo::class,

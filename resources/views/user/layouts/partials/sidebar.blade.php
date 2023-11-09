@@ -155,10 +155,10 @@
             </li>
             @endif
 
-            <li class="@if (\Route::current()->getName() == 'user.swapcoin') active @endif nav-item"><a
+           <!-- <li class="@if (\Route::current()->getName() == 'user.swapcoin') active @endif nav-item"><a
                     class="d-flex align-items-center" href="{{ route('user.swapcoin') }}"><i
                         data-feather="refresh-cw"></i><span class="menu-title text-truncate"
-                        data-i18n="Leaflet Maps">Coin Swap</span></a>
+                        data-i18n="Leaflet Maps">Coin Swap</span></a> --!>
             </li>
 
             <!-- <li class=" navigation-header"><span data-i18n="User Interface">User Settings</span><i

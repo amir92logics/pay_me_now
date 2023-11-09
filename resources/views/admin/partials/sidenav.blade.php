@@ -186,8 +186,8 @@
                         </li>
                     </ul>
                 </li>
-                <li class="@if (\Route::current()->getName() == 'admin.coin.swap') active @endif nav-item"><a class="d-flex align-items-center" href="{{ route('admin.coin.swap') }}"><i data-feather="refresh-cw"></i><span class="menu-title text-truncate" data-i18n="Leaflet Maps">Coin Swap</span></a>
-                </li>
+              <!--  <li class="@if (\Route::current()->getName() == 'admin.coin.swap') active @endif nav-item"><a class="d-flex align-items-center" href="{{ route('admin.coin.swap') }}"><i data-feather="refresh-cw"></i><span class="menu-title text-truncate" data-i18n="Leaflet Maps">Coin Swap</span></a>
+                </li> --!>
             @endif
 
             <!--##########USER MANAGER##########!-->

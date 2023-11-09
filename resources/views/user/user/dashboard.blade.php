@@ -118,7 +118,7 @@
     </div>
 
     <div class=" col-md-4">
-    @if ($subAccounts > 0)
+    @if ($subAccounts > 0 && $SubSavingAccountBalance > 0)
 
         <div class="card">
             <div class="card-body">
@@ -170,6 +170,55 @@
                 </div>
             </div>
         </div>
+
+    @endif
+      @if ($subAccounts > 0 && $SubSavingAccountBalance == 0)
+
+                <div class="row bg-white p-1">
+                    <div class="col-6 ">
+                        <h5> <b>@lang('Saving Account')</b></h5>
+
+                        <h3 class="mb-75 mt-2 pt-50">
+                            <a href="{{ route('user.mysavings') }}"> {{ $general->cur_sym }}
+                                {{ showAmount($saved) }}</a>
+                        </h3>
+                    </div>
+
+                    <div class="col-6">
+                        <div class="col-12 text-end">
+                            <button type="button" class="btn btn-dark btn-sm d-block float-end" data-bs-toggle="popover"
+                                data-bs-placement="top" data-bs-container="body" title=""
+                                aria-describedby="popover343370">
+                                <i data-feather='eye'></i>
+                            </button>
+                        </div>
+                    </div>
+
+                </div>
+    @endif
+@if($SubSavingAccountBalance > 0 && $subAccounts == 0)
+                <div class="row bg-white p-1">
+                    <div class="col-10 ">
+                        <h5> <b>@lang('Liquid Cash Account')</b></h5>
+
+                        <h3 class="mb-75 mt-2 pt-50">
+                            <a href="{{ route('user.subsaving.index') }}"> {{ $general->cur_sym }}
+                                {{ showAmount($SubSavingAccountBalance) }}</a>
+                        </h3>
+                    </div>
+
+                    <div class="col-2">
+                        <div class="col-12 text-end">
+                            <button type="button" class="btn btn-dark btn-sm d-block float-end" data-bs-toggle="popover"
+                                data-bs-placement="top" data-bs-container="body" title=""
+                                aria-describedby="popover343370">
+                                <i data-feather='eye'></i>
+                            </button>
+                        </div>
+                    </div>
+
+                </div>
+
     @endif
 
     @if ($subAccounts == 0)
@@ -338,7 +387,7 @@
                     <a class="btn btn-primary btn-sm mt-1"
                         href="{{ route('user.withdraw-methods.index') }}">{{ __('Cash Out') }} <i
                             data-feather='credit-card'></i></a>
-                    <a class="btn btn-primary btn-sm mt-1" href="">{{ __('Bill Pay') }} <i
+                    <a class="btn btn-primary btn-sm mt-1" href="{{ route('user.support') }}">{{ __('Bill Pay') }} <i
                             data-feather='dollar-sign'></i></a>
                 </div>
             </div>
@@ -407,7 +456,7 @@
                     <a class="btn btn-primary btn-sm mt-1"
                         href="{{ route('user.withdraw-methods.index') }}">{{ __('Cash Out') }} <i
                             data-feather='credit-card'></i></a>
-                    <a class="btn btn-primary btn-sm mt-1" href="">{{ __('Bill Pay') }} <i
+                    <a class="btn btn-primary btn-sm mt-1" href="{{ route('user.support') }}">{{ __('Bill Pay') }} <i
                             data-feather='dollar-sign'></i></a>
                 </div>
             </div>

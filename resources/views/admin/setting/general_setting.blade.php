@@ -186,6 +186,16 @@
                                 </label>
                             </div>
                         </div>
+                         <div class="form-group col-lg-2 col-sm-6 col-md-4 mb-3">
+                            <label class="form-control-label font-weight-bold">@lang('public pages')</label>
+                            <div class="form-check form-switch form-check-primary">
+                                <input type="checkbox" class="form-check-input" name="public_pages" @if($general->public_pages) checked @endif id="customSwitch11" />
+                                <label class="form-check-label" for="customSwitch11">
+                                    <span class="switch-icon-left"><i data-feather="plus"></i></span>
+                                    <span class="switch-icon-right"><i data-feather="x"></i></span>
+                                </label>
+                            </div>
+                        </div>
                     </div>
 
                     <div class="form-group">

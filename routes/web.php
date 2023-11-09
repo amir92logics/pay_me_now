@@ -501,7 +501,7 @@ Route::prefix('cron')->name('cron.')->group(function () {
 
 
 Route::get('/privacy/page/{slug}/{id}', 'SiteController@privacyPage')->name('privacy.page');
-Route::get('/contact', 'SiteController@contact')->name('contact');
+Route::get('/contact', 'SiteController@contact')->name('contact')->middleware('publicStatus');
 Route::post('/contact', 'SiteController@contactSubmit');
 Route::get('/change/{lang?}', 'SiteController@changeLanguage')->name('lang');
 
@@ -510,4 +510,4 @@ Route::get('/cookie/accept', 'SiteController@cookieAccept')->name('cookie.accept
 Route::get('placeholder-image/{size}', 'SiteController@placeholderImage')->name('placeholder.image');
 
 Route::get('/{slug}', 'SiteController@pages')->name('pages');
-Route::get('/', 'SiteController@index')->name('home');
+Route::get('/', 'SiteController@index')->name('home')->middleware('publicStatus');

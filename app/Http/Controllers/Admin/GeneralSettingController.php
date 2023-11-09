@@ -39,6 +39,7 @@ class GeneralSettingController extends Controller
         $general->sn = $request->sn ? 1 : 0;
         $general->force_ssl = $request->force_ssl ? 1 : 0;
         $general->registration = $request->registration ? 1 : 0;
+        $general->public_pages = $request->public_pages ? 1 : 0;
         $general->agree = $request->agree ? 1 : 0;
         $general->sitename = $request->sitename;
         $general->cur_text = $request->cur_text;

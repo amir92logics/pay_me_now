@@ -18,7 +18,7 @@
             </div>
             <div class="card-body">
                 <p class="card-text">
-                    @lang('Your Liquid Cashs Accounts').
+                    @lang('Your Sub Savings Accounts').
                 </p>
             </div>
             <div class="table-responsive">
@@ -94,18 +94,7 @@
                             <small>Check toggle to credit and uncheck toggle to debit</small><br>
                             <small>Your Main Account Balance is {{showAmount(auth_user()->balance)}} {{__($general->cur_text)}}</small><br>
                         </div>
-                        <div class="form-group col-md-12">
-                            <label>@lang('Amount')<span class="text-danger">*</span></label>
-                            <div class="input-group has_append">
-                                <input type="number" min="0.00" step="0.01" name="amount" class="form-control" placeholder="@lang('Please provide positive amount')">
-                            </div>
-                        </div>
-                        <div class="form-group col-md-12">
-                            <label>@lang('Amount')</label>
-                            <div class="input-group has_append">
-                                <input type="text" name="details" class="form-control" placeholder="@lang('Optional Details')">
-                            </div>
-                        </div>
+                       
                     </div>
                 </div>
                 <div class="modal-footer">

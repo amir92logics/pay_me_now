@@ -124,7 +124,7 @@ class LoanController extends Controller
         // $loan = Loan::find(17);
         // dd($loan->load('attributes'));
         $pageTitle = 'Loan Requests';
-        $loan = Loan::whereStatus(0)->paginate(10);
+        $loan = Loan::whereStatus(0)->orderBy('created_at','desc')->paginate(10);
         $emptyMessage = "Data Not Found";
 
         return view('admin.loan.loan',  compact('pageTitle', 'loan', 'emptyMessage'));
