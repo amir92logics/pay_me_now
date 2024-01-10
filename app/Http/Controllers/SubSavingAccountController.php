@@ -143,6 +143,8 @@ class SubSavingAccountController extends Controller
         }
 
         $notify[] = DB::transaction(function () use ($request, $subAccount) {
+        // dd($request, $subAccount);
+            
             $amount = $request->input('amount');
             $subAmount = $subAccount->amount;
             $balance = auth_user()->balance;

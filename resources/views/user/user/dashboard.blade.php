@@ -570,6 +570,7 @@
 
 <!-- Dashboard Footer Starts -->
 <div class="dashboard-dynamic-footer bg-black fw-bold p-2 text-white w-100">
+ @if ($dashboardFooter->item.length > 0)
     <div class="">{{ $dashboardFooter[0]->data_text }}</div>
     <div class="">{{ $dashboardFooter[1]->data_text }}</div>
     <div class="">
@@ -583,6 +584,8 @@
         @empty
         @endforelse
     </div>
+        @endif 
+
 </div>
 <!-- Dashboard Footer Ends -->
 </div>

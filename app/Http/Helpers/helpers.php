@@ -40,14 +40,16 @@ if (!function_exists('trx_type_int')) {
      */
     function trx_type_int(string $type = 'credit'): ?int
     {
+
         $types = [
             'credit' => 1,
             'debit' => 0,
         ];
-        if (!in_array($type, $types)) {
-            return null;
-        }
+        if (in_array($types[$type], $types)) {
         return $types[$type];
+        }
+        return null;
+
     }
 }
 
@@ -508,9 +510,9 @@ function getImage($image, $size = null)
 
 function notify($user, $type, $shortCodes = null)
 {
-
+// dd('sdsds');
     sendEmail($user, $type, $shortCodes);
-    sendSms($user, $type, $shortCodes);
+    // sendSms($user, $type, $shortCodes);
 }
 
 

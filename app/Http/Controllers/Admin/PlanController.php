@@ -13,10 +13,13 @@ class PlanController extends Controller
 
 
     public function index(){
+        
         $pageTitle = 'Investment Plans';
-        $loanPlan = LoanPlan::get();
+        $plan = Plan::latest()->paginate(getPaginate());
+        $timer = PlanTimer::get();
+                //  dd($timer);
         $emptyMessage = 'Data Not Found';
-        return view('admin.plan.index', compact('pageTitle', 'loanPlan','emptyMessage'));
+        return view('admin.plan.index', compact('pageTitle', 'plan', 'timer', 'emptyMessage'));
     }
 
 
@@ -41,6 +44,7 @@ class PlanController extends Controller
         $plan->total_return = $request->total_return;
         $plan->interest_type = $request->interest_type;  //	1=>Percent, 0=>Fixed
         $plan->interest_amount = $request->interest;
+        $plan->active = $request->status;
         $plan->status = $request->status;
         $plan->save();
 
@@ -77,8 +81,9 @@ class PlanController extends Controller
     }
 
      public function timer(){
-        $pageTitle = 'Plan Timer';
-        $timer = PlanTimer::latest()->paginate(getPaginate());
+         $pageTitle = 'Plan Timer';
+         $timer = PlanTimer::latest()->paginate(getPaginate());
+        //  dd($timer);
         $emptyMessage = 'Data Not Found';
         return view('admin.plan.timer', compact('pageTitle','timer','emptyMessage'));
     }
@@ -103,15 +108,16 @@ class PlanController extends Controller
     }
 
      public function timeredit(Request $request){
-
-        $request->validate([
-            'id'=> 'required|exists:plans,id',
-            'name'=> 'required|string|max:191',
-            'slug'=> 'required|string',
-            'timer'=> 'required|numeric',
-        ]);
-
-        $timer = PlanTimer::find($request->id);
+         
+         $request->validate([
+             'id'=> 'required',
+             'name'=> 'required|string|max:191',
+             'slug'=> 'required|string',
+             'timer'=> 'required|numeric',
+            ]);
+            
+            $timer = PlanTimer::find($request->id);
+            // dd($timer);
         $timer->name = $request->name;
         $timer->slug = $request->slug;
         $timer->time = $request->timer;

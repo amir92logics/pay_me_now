@@ -19,6 +19,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules\Password;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
 
 class SavingsController extends Controller
 {
@@ -237,4 +238,88 @@ class SavingsController extends Controller
         $notify[] = ['error', 'Sorry we cant process this payment at the moment.'];
         return back()->withNotify($notify);
     }
+
+public function trx(Request $request)
+{
+    // dd($request);
+    abort_if(is_null($request->input('account')), 401);
+
+    $save = Savings::where('user_id', auth()->id())->findOrFail($request->input('account'));
+    
+    if ($save->status == 0) {
+        $notify[] = ['error', "Your Account is Disabled, First Enable it"];
+        return back()->withNotify($notify);
+    }
+    $request->validate([
+        'amount' => 'required|numeric|gt:0',
+    ]);
+    
+    if (($request->boolean('act') && $request->input('amount') > auth_user()->balance) || (!$request->boolean('act') && $request->input('amount') > $save->amount)) {
+        $notify[] = ['error', 'You has insufficient balance.'];
+        return back()->withNotify($notify);
+    }
+
+    // dd($request, $save);
+    $notify[] = DB::transaction(function () use ($request, $save) {
+        $amount = $request->input('amount');
+        $subAmount = $save->amount;
+        $balance = auth_user()->balance;
+        $general = GeneralSetting::first(['cur_text', 'cur_sym']);
+        if ($request->boolean('act')) {
+            // dd('$type');
+
+            $trx = getTrx(6, 'SSAC');
+            auth_user()->update([
+                'balance' => ($balance - $amount)
+            ]);
+            $save->balance += $request->amount;
+            $save->save();
+            // $subAccount->log()->create([
+            //     'trx' => $trx,
+            //     'trx_type' => trx_type_int(),
+            //     'details' => $request->input('details'),
+            //     'amount' => $amount,
+            //     'initial_balance' => $subAmount,
+            // ]);
+            // $subAccount->update([
+            //     'amount' => ($subAmount + $amount)
+            // ]);
+
+            // notify(auth_user(), 'BAL_ADD', [
+            //     'trx' => $trx,
+            //     'amount' => showAmount($amount),
+            //     'currency' => $general->cur_text,
+            //     'post_balance' => showAmount(auth_user()->balance),
+            // ]);
+        } else {
+            dd('$type');
+
+            $trx = getTrx(6, 'SSAD');
+            auth_user()->update([
+                'balance' => ($balance + $amount)
+            ]);
+            $save->balance -= $request->amount;
+            $save->save();
+            // $subAccount->log()->create([
+            //     'trx' => $trx,
+            //     'trx_type' => trx_type_int('debit'),
+            //     'details' => $request->input('details'),
+            //     'amount' => $amount,
+            //     'initial_balance' => $subAccount->amount,
+            // ]);
+
+            // $subAccount->update([
+            //     'amount' => ($subAmount - $amount)
+            // ]);
+            notify(auth_user(), 'BAL_SUB', [
+                'trx' => $trx,
+                'amount' => showAmount($amount),
+                'currency' => $general->cur_text,
+                'post_balance' => showAmount(auth_user()->balance)
+            ]);
+        }
+        return ['success', $general->cur_sym . $amount . ' has been transfered'];
+    });
+    return back()->withNotify($notify);
+}
 }
