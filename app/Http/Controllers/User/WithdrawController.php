@@ -10,7 +10,7 @@ class WithdrawController extends Controller
 {
     public function index()
     {
-        $withdraws  = Withdrawal::with('method')->latest()->paginate();
+        $withdraws  = Withdrawal::with('method')->where('user_id', auth()->id())->latest()->paginate();
         return view('user.user.withdraw.log', compact('withdraws'));
     }
 }

@@ -264,7 +264,7 @@ $progress = $saved->paid / $saved->total * 100; @endphp
                 <h5 class="modal-title">@lang('Transfer Balance')</h5>
 
             </div>
-            <form action="{{route('user.subsaving.trx')}}" method="POST">
+            <form action="{{route('user.saving.trx')}}" method="POST">
                 @csrf
                 <input type="hidden" name="account" id="accountId">
                 <div class="modal-body">

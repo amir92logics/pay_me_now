@@ -132,7 +132,7 @@
                 </div>
                 <div class="row mt-1">
                     <div class="mb-1 col-12">
-                        <label for="howhear" class="form-label">@lang('How did you hear about PayMeNow (optional) ?')</label>
+                        <label for="howhear" class="form-label">@lang('How did you hear about us (optional) ?')</label>
                         <input type="text" class="form-control" id="howhear" name="howhear"
                             value="{{ old('howhear') }}" placeholder="Enter First Name" aria-describedby="howhear"
                             tabindex="9" autofocus />

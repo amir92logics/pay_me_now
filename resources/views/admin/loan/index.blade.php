@@ -1,7 +1,8 @@
 @extends('admin.layouts.app')
 
 @section('panel')
-    <div class="row">
+    <div class="row">       {{dd($plan)}}
+
         <div class="col-lg-12">
             <div class="card b-radius--10 ">
                 <div class="card-header d-flex justify-content-between">

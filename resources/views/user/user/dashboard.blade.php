@@ -618,6 +618,7 @@
         @empty
         @endforelse
     </div>
+
 </div>
 <!-- Dashboard Footer Ends -->
 </div>

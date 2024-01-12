@@ -114,7 +114,6 @@ class UserController extends Controller
         $dashboardFooter = DashboardContent::where('data_key', '=', 'dashboard.footer')->get();
         $subSavingAccounts = SubSavingAccount::where('user_id', auth()->id())->get();
         $subAccounts = SubSavingAccount::where('user_id', auth()->id())->count();
-
         return view($this->activeTemplate . 'user.dashboard', $data, compact(
             'pageTitle',
             'user',
