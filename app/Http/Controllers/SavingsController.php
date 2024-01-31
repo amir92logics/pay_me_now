@@ -44,8 +44,7 @@ class SavingsController extends Controller
 
     public function requestsubmit(Request $request)
     {
-
-        if ($request->type == 1) {
+        if ($request->plan == 1) {
 
             $request->validate([
                 'ramount' => 'required|int|min:100',
@@ -75,9 +74,9 @@ class SavingsController extends Controller
         $user = Auth::user();
 
         $save = new Savings();
-        $save->type = $request->type; // Plan method ID
+        $save->type = $request->plan; // Plan method ID
         $save->user_id = $user->id;
-        if ($request->type == 1) {
+        if ($request->plan == 1) {
             $user->balance -= $request->amount;
             $user->save();
 
@@ -292,7 +291,7 @@ public function trx(Request $request)
             //     'post_balance' => showAmount(auth_user()->balance),
             // ]);
         } else {
-            dd('$type');
+            // dd('$type');
 
             $trx = getTrx(6, 'SSAD');
             auth_user()->update([

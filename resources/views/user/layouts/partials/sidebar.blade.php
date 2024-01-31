@@ -73,6 +73,25 @@
                   </li>
                 </ul>
             </li>
+             <li class="nav-item"><a class="d-flex align-items-center" href="#"><i
+                data-feather="bar-chart-2"></i><span class="menu-title text-truncate"
+                data-i18n="Invoice">@lang('Interest Bearing')</span></a>
+                <ul class="menu-content">
+                    <li class="@if (\Route::current()->getName() == 'user.deposits.request') active @endif"><a class="d-flex align-items-center"
+                            href="{{ route('user.deposits.request') }}"><i data-feather="circle"></i><span
+                                class="menu-item text-truncate" data-i18n="List">@lang('New Deposit')</span></a>
+                    </li>
+                    <li class="@if (\Route::current()->getName() == 'user.mydeposits') active @endif"><a class="d-flex align-items-center"
+                            href="{{ route('user.mydeposits') }}"><i data-feather="circle"></i><span
+                                class="menu-item text-truncate" data-i18n="Preview">@lang('My Depsits')</span></a>
+                    </li>
+                   <li class="@if (\Route::current()->getName() == 'user.depositbalance') active @endif"><a class="d-flex align-items-center"
+                            href="{{ route('user.depositbalance') }}"><i data-feather="circle"></i><span
+                                class="menu-item text-truncate" data-i18n="Preview">@lang('History')</span></a>
+                    </li> 
+                </ul>
+            </li>
+
 
             @if ($meta->savings ?? false)
             <li class="nav-item"><a class="d-flex align-items-center" href="#"><i
@@ -93,6 +112,7 @@
                     </li>
                 </ul>
             </li>
+           
 
             <li class="nav-item"><a class="d-flex align-items-center" href="#"><i
                         data-feather="shopping-bag"></i><span class="menu-title text-truncate"

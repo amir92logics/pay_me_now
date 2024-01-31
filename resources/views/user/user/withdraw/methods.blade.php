@@ -22,11 +22,7 @@
                 <div class="d-flex justify-content-between">
                     <div>
                     <h4 class="card-title mb-1">{{ $method->name }}</h4>
-                    @if ($method->usermethod)
-                    <a class="text-warning" href="{{ route('user.withdraw-methods.show', $method->id) }}">
-                        <i data-feather='edit'></i>
-                    </a>
-                    @endif
+                   
                 </div>
                     <img height="30" src="{{ asset('assets/images/withdraw/method/'.$method->image) }}" alt="Card image cap">
                 
@@ -49,6 +45,11 @@
                                 {{ __('Withdraw') }} <i data-feather='dollar-sign'></i>
                             </a>
                         </div>
+                    @endif
+                     @if ($method->usermethod)
+                    <a class="text-warning float-end" href="{{ route('user.withdraw-methods.show', $method->id) }}">
+                        <i data-feather='edit'></i>
+                    </a>
                     @endif
                     @if (!$method->usermethod)
                     <a href="{{ route('user.make-withdraw', $method->id) }}" class="btn btn-primary btn-sm"><i data-feather='arrow-right-circle'></i></a>

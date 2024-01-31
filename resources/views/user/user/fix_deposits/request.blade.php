@@ -38,14 +38,14 @@
                 <div class="bs-stepper-content">
                     <div id="account-details" class="content" role="tabpanel" aria-labelledby="account-details-trigger">
                         <div class="content-header">
-                            <h5 class="mb-0">Savings Plans</h5>
-                            <small class="text-muted">Please Select A Savings Plan</small>
+                            <h5 class="mb-0">Deposit Plans</h5>
+                            <small class="text-muted">Please Select A Deposit Plan</small>
                         </div>
                         <div class="row">
 
                             <div class="mb-1 col-md-12">
                                 <div class="alert alert-warning" role="alert">
-                                    <div class="alert-body"><strong>Note!</strong>Please note that your savings plan will be
+                                    <div class="alert-body"><strong>Note!</strong>Please note that your Deposit plan will be
                                         serviced from the fund from your deposit wallet..</div>
                                 </div>
                             </div>
@@ -57,17 +57,22 @@
                                     id="select2-basic">
                                     <option selected disabled>Select An Option</option>
                                     @foreach ($plans as $data)
+                                    
                                         <option value="{{ $data->id}}" data-id="{{ $data->id }}"
                                             data-resource="{{ $data }}" data-name="{{ $data->name }}"
-                                            data-min_amount="{{ showAmount($data->min) }}{{ __($general->cur_text) }}"
-                                            data-max_amount="{{ showAmount($data->max) }}{{ __($general->cur_text) }}"
-                                            data-duration="{{ $data->duration }}"> {{ __($data->name) }}
+                                            data-min_amount="{{ showAmount($data->min_amount) }}{{ __($general->cur_text) }}"
+                                            data-max_amount="{{ showAmount($data->max_amount) }}{{ __($general->cur_text) }}"
+                                            data-duration="{{ $data->timer }}"
+                                            data-interest_type="{{ $data->interest_type}}"
+                                            data-interest_amount="{{ $data->interest_amount}}"
+                                            data-total_return="{{ $data->total_return}}"
+                                            > {{ __($data->name) }}
                                         </option>
                                     @endforeach
                                 </select>
                                 <div class="row">
                                     <div class="mb-1 col-md-6">
-                                        <label class="form-label" for="email">Saving Plan Name</label>
+                                        <label class="form-label" for="email">Deposit Plan Name</label>
                                         <input type="text" id="name" readonly class="form-control"
                                             placeholder="name" aria-label="0" />
                                     </div>
@@ -89,6 +94,21 @@
                                         <input readonly type="text" name="duration" id="duration" class="form-control"
                                             placeholder="Duration" />
                                     </div>
+                                     <div class="mb-1 form-password-toggle col-md-6">
+                                        <label class="form-label" for="interest_type">Interest Type</label>
+                                        <input readonly type="text" name="interest_type" id="interest_type" class="form-control"
+                                            placeholder="Interest Type" />
+                                    </div>
+                                     <div class="mb-1 form-password-toggle col-md-6">
+                                        <label class="form-label" for="interest_amount">Interest Amount</label>
+                                        <input readonly type="text" name="interest_amount" id="interest_amount" class="form-control"
+                                            placeholder="Interest Amount" />
+                                    </div>
+                                     <div class="mb-1 form-password-toggle col-md-6">
+                                        <label class="form-label" for="total_return">Total Return</label>
+                                        <input readonly type="text" name="total_return" id="total_return" class="form-control"
+                                            placeholder="Total Return" />
+                                    </div>
                                 </div>
                                 @push('script')
                                     <script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
@@ -96,14 +116,10 @@
                                         $(document).ready(function() {
                                             $("#first").change(function() {
                                                 $(this).find("option:selected").each(function() {
-                                                    if ($(this).attr("value") == "1") {
-                                                        $(".box").not(".red").hide();
+                                                    if ($(this).attr("value") > 0) {
                                                         $(".red").show();
-                                                    } else if ($(this).attr("value") == "2") {
-                                                        $(".box").not(".green").hide();
-                                                        $(".green").show();
                                                     } else {
-                                                        $(".box").hide();
+                                                        $(".red").hide();
                                                     }
                                                 });
                                             }).change();
@@ -112,67 +128,16 @@
                                 @endpush
                             </div>
 
-                            <div class="mb-1 col-md-12 red box">
-                                <div class="alert alert-primary" role="alert">
-                                    <div class="alert-body"><strong>Note!</strong> Choosing this plan implies that any
-                                        amount entered in the amount field below will be charged from your deposit wallet at
-                                        interval using the set recurrent cycle. You wont have access to this fund until the
-                                        recurrent cycle is complete</div>
-                                </div>
-                            </div>
-
-                            <div class="mb-1 col-md-12 red box">
-
-                                <label class="form-label" for="email">Recurrent Cycle</label>
-                                <select name="cycle" class="form-control">
-                                    <option selected disabled>Select An Option</option>
-                                    <option value="1">Daily</option>
-                                    <option value="7">Weekly</option>
-                                    <option value="30">Monthly</option>
-                                </select>
-                            </div>
-
-
+                           
 
                             <div class="mb-1 form-password-toggle col-md-12  red box">
-                                <label class="form-label" for="Min">Recurrent Times</label>
-                                <input type="number" name="recurrent" class="form-control"
-                                    placeholder="Enter the number of recurrent" />
-                            </div>
-
-                            <div class="mb-1 form-password-toggle col-md-12  red box">
-                                <label class="form-label" for="Min">Recurrent Savings Amount </label>
-                                <input type="number" name="ramount" class="form-control" placeholder="0.00" />
+                                <label class="form-label" for="Min">Enter Deposit Amount </label>
+                                <input type="number" name="famount" class="form-control" placeholder="0.00" />
                             </div>
 
                         </div>
 
-                        <div class="row  green box">
-
-                            <div class="demo-spacing-0">
-                                <div class="alert alert-primary" role="alert">
-                                    <div class="alert-body"><strong>Note!</strong> Please note that you will not have
-                                        access to any fund saved on this plan until it completes the targeted amount or the
-                                        maturity date elapses..</div>
-                                </div>
-                            </div>
-                            <br>
-
-
-                            <div class="mb-1 form-password-toggle col-md-12">
-                                <br>
-                                <label class="form-label" for="Min">Enter Target Amount </label>
-                                <input type="number" name="tamount" class="form-control" placeholder="0.00" />
-                            </div>
-
-                            <div class="mb-1 form-password-toggle col-md-12">
-                                <br>
-                                <label class="form-label" for="Min">Enter Maturity Date </label>
-                                <input type="date" name="mature" class="form-control" placeholder="Enter Date" />
-                            </div>
-
-
-                        </div>
+                        
 
 
                         <div class="d-flex justify-content-between">
@@ -205,11 +170,18 @@
             var duration = $("#first option:selected").attr('data-duration');
             var min_amount = $("#first option:selected").attr('data-min_amount');
             var max_amount = $("#first option:selected").attr('data-max_amount');
-            document.getElementById("plan").value = plan_id;
+            var interest_type = $("#first option:selected").attr('data-interest_type');
+            var interest_amount = $("#first option:selected").attr('data-interest_amount');
+            var total_return = $("#first option:selected").attr('data-total_return');
+
+            document.getElementById("plan").value = plan_id ? plan_id : '' ;
             document.getElementById("name").value = name ? name : '' ;
             document.getElementById("min").value = min_amount ? min_amount : '' ;
             document.getElementById("max").value = max_amount ? max_amount : '' ;
-            document.getElementById("duration").value = duration ? duration + " Months" : '' ;
+            document.getElementById("interest_type").value = interest_type ? interest_type == 0 ? 'Fixed' : 'Percent' : ''  ;
+            document.getElementById("interest_amount").value = interest_amount ? interest_amount : '' ;
+            document.getElementById("total_return").value = total_return ? total_return : '' ;
+            document.getElementById("duration").value = duration ? duration + " Months"  : '' ;
 
             $.ajax({
                 type: 'GET',

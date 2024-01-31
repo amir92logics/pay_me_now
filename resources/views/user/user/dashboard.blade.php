@@ -552,9 +552,9 @@
     </div>
 
 
-    <div class="row match-height">
+    <div class="row match-height ">
         @if (session('ads-close'))
-        <div class="col-12">
+        <div class="col-12 d-sm-none">
             <div class="alert alert-light alert-dismissible fade show p-1" role="alert">
                 <div class="row match-height">
                     <div class="col-lg-12 col-md-6 col-12">

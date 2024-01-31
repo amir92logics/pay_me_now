@@ -440,11 +440,20 @@ Route::name('user.')->group(function () {
             Route::get('/trx/report', 'UserController@trxReport')->name('trx.report');
             Route::get('/new/savings', 'UserController@savings')->name('savings');
 
+            //Fixed Deposit
+             Route::get('/request/deposits', 'FixedDepositController@requestdeposits')->name('deposits.request');
+             Route::post('/request/deposits', 'FixedDepositController@requestsubmit');
+             Route::get('/my-deposits', 'FixedDepositController@mydeposits')->name('mydeposits');
+             Route::get('/deposits/{id}', 'FixedDepositController@viewsaved')->name('viewsaved');
+            //  Route::post('/savings/{id}', 'SavingsController@savenow')->name('save.pay');
+             Route::get('/deposit-balance', 'FixedDepositController@depositbalance')->name('depositbalance');
+            //  Route::post('/savingaccounts/trx', 'SavingsController@trx')->name('saving.trx');
+
             //Savings
             Route::get('/request/savings', 'SavingsController@requestsavings')->name('savings.request');
             Route::post('/request/savings', 'SavingsController@requestsubmit');
             Route::get('/my-savings', 'SavingsController@mysavings')->name('mysavings');
-            Route::get('/savings/{id}', 'SavingsController@viewsaved')->name('viewsaved');
+            // Route::get('/savings/{id}', 'SavingsController@viewsaved')->name('viewsaved');
             Route::post('/savings/{id}', 'SavingsController@savenow')->name('save.pay');
             Route::get('/saving-balance', 'SavingsController@savingbalance')->name('savingbalance');
             Route::post('/savingaccounts/trx', 'SavingsController@trx')->name('saving.trx');

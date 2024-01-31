@@ -61,7 +61,7 @@ class AppServiceProvider extends ServiceProvider
 
         view()->composer('user.layouts.partials.topnav', function ($view) {
             $view->with([
-                'userNotifications' => AdminNotification::where('read_status', 0)->where('user_id', auth()->id())->with('user')->orderBy('id', 'desc')->get(),
+                'userNotifications' => AdminNotification::where('read_status', 0)->where('user_id', auth()->id())->where('click_url', 'like', '/user%')->with('user')->orderBy('id', 'desc')->get(),
             ]);
         });
 
