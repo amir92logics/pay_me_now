@@ -18,7 +18,7 @@
       </div>
       <div class="card-body">
         <p class="card-text">
-          @lang('Your Fixed Deposit Plan Log').
+          @lang('Your Interest Bearing Plan Log').
         </p>
       </div>
       <div class="table-responsive">
@@ -27,10 +27,12 @@
            <tr>
                 <th>@lang('Trx')</th>
                 <th>@lang('Plan')</th>
+                <th>@lang('Duration')</th>
+                <th>@lang('Interest Amount')</th>
                 <th>@lang('Amount')</th>
-                <th>@lang('Balance')</th>
+                {{-- <th>@lang('Balance')</th> --}}
                 <th>@lang('Status')</th>
-                <th>@lang('Action')</th>
+                {{-- <th>@lang('Action')</th> --}}
             </tr>
           </thead>
           <tbody>
@@ -39,27 +41,39 @@
                 <td data-label="#@lang('Trx')">{{$data->reference}}<br>
                 <small>{{showDateTime($data->created_at)}}</small>
                 </td>
-                <td data-label="@lang('Gateway')">{{$plans->firstWhere('id',$data->plan_id)->name}}</td>
+                <td data-label="@lang('Gateway')">{{$data->plan->name}}</td>
+                 <td data-label="@lang('Plan')">
+                                    <span class="font-weight-bold" data-toggle="tooltip" data-original-title="@lang('Duration')">
+                                        <a href="{{ route('admin.plan.index') }}">{{ $data->plan->timer }} Months</a>
+                                    </span>
+                                </td>
+
+                              
+                                <td data-label="@lang('Interest Amount')">
+                                    {{ showAmount($data->plan->interest_amount) }}
+                                    {{ __($general->cur_text) }}
+                                </td>
+
                 <td data-label="@lang('Amount')">
                     <strong>{{showAmount($data->amount)}} {{__($general->cur_text)}}</strong><br>
                 </td>
-                <td data-label="@lang('Balance')" class="text-primary">
+                {{-- <td data-label="@lang('Balance')" class="text-primary">
                     {{showAmount($data->balance)}} {{__($general->cur_text)}}
-                </td>
+                </td> --}}
 
 
                 <td data-label="@lang('Status')">
-                     @if($data->status == 1)
+                     @if($data->status == 0)
                     <span class="badge rounded-pill badge-light-primary me-1">@lang('Running')</span>
-                    @elseif($data->status == 0)
+                    @elseif($data->status == 1)
                         <span class="badge rounded-pill badge-light-success me-1">@lang('Completed')</span>
 
                     @endif
 
                 </td>
-                <td data-label="@lang('Saved')">
+                {{-- <td data-label="@lang('Saved')">
                 <a ><i class="text-primary" data-feather='menu'></i></a>
-                </td>
+                </td> --}}
             </tr>
             @empty
                 <tr>

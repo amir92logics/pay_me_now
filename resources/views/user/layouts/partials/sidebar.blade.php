@@ -79,16 +79,16 @@
                 <ul class="menu-content">
                     <li class="@if (\Route::current()->getName() == 'user.deposits.request') active @endif"><a class="d-flex align-items-center"
                             href="{{ route('user.deposits.request') }}"><i data-feather="circle"></i><span
-                                class="menu-item text-truncate" data-i18n="List">@lang('New Deposit')</span></a>
+                                class="menu-item text-truncate" data-i18n="List">@lang('New Interest')</span></a>
                     </li>
                     <li class="@if (\Route::current()->getName() == 'user.mydeposits') active @endif"><a class="d-flex align-items-center"
                             href="{{ route('user.mydeposits') }}"><i data-feather="circle"></i><span
-                                class="menu-item text-truncate" data-i18n="Preview">@lang('My Depsits')</span></a>
+                                class="menu-item text-truncate" data-i18n="Preview">@lang('Mibac')</span></a>
                     </li>
-                   <li class="@if (\Route::current()->getName() == 'user.depositbalance') active @endif"><a class="d-flex align-items-center"
+                   {{-- <li class="@if (\Route::current()->getName() == 'user.depositbalance') active @endif"><a class="d-flex align-items-center"
                             href="{{ route('user.depositbalance') }}"><i data-feather="circle"></i><span
                                 class="menu-item text-truncate" data-i18n="Preview">@lang('History')</span></a>
-                    </li> 
+                    </li>  --}}
                 </ul>
             </li>
 
@@ -106,10 +106,10 @@
                             href="{{ route('user.mysavings') }}"><i data-feather="circle"></i><span
                                 class="menu-item text-truncate" data-i18n="Preview">@lang('My Savings')</span></a>
                     </li>
-                    <li class="@if (\Route::current()->getName() == 'user.savingbalance') active @endif"><a class="d-flex align-items-center"
+                    {{-- <li class="@if (\Route::current()->getName() == 'user.savingbalance') active @endif"><a class="d-flex align-items-center"
                             href="{{ route('user.savingbalance') }}"><i data-feather="circle"></i><span
                                 class="menu-item text-truncate" data-i18n="Preview">@lang('History')</span></a>
-                    </li>
+                    </li> --}}
                 </ul>
             </li>
            

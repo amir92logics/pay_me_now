@@ -9,6 +9,7 @@
                             <thead>
                             <tr>
                                 <th>@lang('Plan')</th>
+                                <th>@lang('Duration')</th>
                                 <th>@lang('User')</th>
                                 <th>@lang('Return')</th>
                                 <th>@lang('Interest Amount')</th>
@@ -28,6 +29,11 @@
                                         {{ $data->trx }}
                                     </span>
                                 </td>
+                                <td data-label="@lang('Plan')">
+                                    <span class="font-weight-bold" data-toggle="tooltip" data-original-title="@lang('Duration')">
+                                        <a href="{{ route('admin.plan.index') }}">{{ $data->plan->timer }} Months</a>
+                                    </span>
+                                </td>
                                 <td data-label="@lang('User')">
                                     <span class="font-weight-bold">{{$data->user->fullname}}</span>
                                         <br>
@@ -39,16 +45,16 @@
 
                                 <td data-label="@lang('Return')">
                                     <span class="font-weight-bold" data-toggle="tooltip" data-original-title="@lang('Transaction Number')">
-                                        @lang('Total') {{ $data->total_return }} @lang('Times')
+                                        @lang('Total') {{ $data->plan->total_return }} @lang('Times')
                                     </span>
                                     <br>
                                     <span class="font-weight-bold" data-toggle="tooltip" data-original-title="@lang('Transaction Number')">
-                                        @lang('Paid') {{ $data->total_paid }} @lang('Times')
+                                        @lang('Paid') {{ $data->plan->total_paid }} @lang('Times')
                                     </span>
                                 </td>
 
                                 <td data-label="@lang('Interest Amount')">
-                                    {{ showAmount($data->interest_amount) }}
+                                    {{ showAmount($data->plan->interest_amount) }}
                                     {{ __($general->cur_text) }}
                                 </td>
 

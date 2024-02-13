@@ -19,7 +19,7 @@ class FixedDepositController extends Controller
 
     public function requestdeposits()
     {
-        $pageTitle = 'New Fixed Deposit';
+        $pageTitle = 'New Interest Bearing';
         $user = Auth::user();
         $plans = Plan::latest()->where('status', 1)->get();
         return view($this->activeTemplate . 'user.fix_deposits.request', compact(
@@ -64,7 +64,7 @@ class FixedDepositController extends Controller
             $fDeposit->balance += $request->amount;
 
             $fDeposit->amount = $request->famount;
-        $fDeposit->status = 1;
+        $fDeposit->status = 0;
         $fDeposit->reference = getTrx();
 
         $fDeposit->save();
@@ -74,7 +74,7 @@ class FixedDepositController extends Controller
     }
     public function mydeposits()
     {
-        $pageTitle = 'My deposits Plan';
+        $pageTitle = 'My Interest Plan';
         $user = Auth::user();
         $saved = FixDeposit::where('user_id', $user->id)->paginate(10);
         $plans = Plan::latest()->where('status', 1)->get();
@@ -93,54 +93,54 @@ class FixedDepositController extends Controller
         return view($this->activeTemplate . 'user.fix_deposits.history', compact('pageTitle'));
     }
 
-    public function viewsaved($id)
-    {
-        $user = Auth::user();
-        $saved = FixDeposit::where('user_id', $user->id)->first();
-        // dd('gfh', $saved, $id);
-        if (!$saved) {
-            $notify[] = ['error', 'Invalid deposits Request.'];
-            return back()->withNotify($notify);
-        }
+    // public function viewsaved($id)
+    // {
+    //     $user = Auth::user();
+    //     $saved = FixDeposit::where('user_id', $user->id)->first();
+    //     // dd('gfh', $saved, $id);
+    //     if (!$saved) {
+    //         $notify[] = ['error', 'Invalid deposits Request.'];
+    //         return back()->withNotify($notify);
+    //     }
 
 
-        $pageTitle = 'My deposits Log';
+    //     $pageTitle = 'My deposits Log';
 
 
-        $year = date('Y');
-        $month = date('m');
-        $day = date('d');
-        $jan = '01';
-        $feb = '02';
-        $mar = '03';
-        $apr = '04';
-        $may = '05';
-        $jun = '06';
-        $jul = '07';
-        $aug = '08';
-        $sep = '09';
-        $oct = '10';
-        $nov = '11';
-        $dec = '12';
+    //     $year = date('Y');
+    //     $month = date('m');
+    //     $day = date('d');
+    //     $jan = '01';
+    //     $feb = '02';
+    //     $mar = '03';
+    //     $apr = '04';
+    //     $may = '05';
+    //     $jun = '06';
+    //     $jul = '07';
+    //     $aug = '08';
+    //     $sep = '09';
+    //     $oct = '10';
+    //     $nov = '11';
+    //     $dec = '12';
 
-        $data['jan'] = SavingPay::where('user_id', $user->id)->whereStatus(1)->whereYear('created_at', $year)->whereLoanId($id)->whereMonth('created_at', $jan)->sum('amount');
-        $data['feb'] = SavingPay::where('user_id', $user->id)->whereStatus(1)->whereYear('created_at', $year)->whereLoanId($id)->whereMonth('created_at', $feb)->sum('amount');
-        $data['mar'] = SavingPay::where('user_id', $user->id)->whereStatus(1)->whereYear('created_at', $year)->whereLoanId($id)->whereMonth('created_at', $mar)->sum('amount');
-        $data['apr'] = SavingPay::where('user_id', $user->id)->whereStatus(1)->whereYear('created_at', $year)->whereLoanId($id)->whereMonth('created_at', $apr)->sum('amount');
-        $data['may'] = SavingPay::where('user_id', $user->id)->whereStatus(1)->whereYear('created_at', $year)->whereLoanId($id)->whereMonth('created_at', $may)->sum('amount');
-        $data['jun'] = SavingPay::where('user_id', $user->id)->whereStatus(1)->whereYear('created_at', $year)->whereLoanId($id)->whereMonth('created_at', $jun)->sum('amount');
-        $data['jul'] = SavingPay::where('user_id', $user->id)->whereStatus(1)->whereYear('created_at', $year)->whereLoanId($id)->whereMonth('created_at', $jul)->sum('amount');
-        $data['aug'] = SavingPay::where('user_id', $user->id)->whereStatus(1)->whereYear('created_at', $year)->whereLoanId($id)->whereMonth('created_at', $aug)->sum('amount');
-        $data['sep'] = SavingPay::where('user_id', $user->id)->whereStatus(1)->whereYear('created_at', $year)->whereLoanId($id)->whereMonth('created_at', $sep)->sum('amount');
-        $data['oct'] = SavingPay::where('user_id', $user->id)->whereStatus(1)->whereYear('created_at', $year)->whereLoanId($id)->whereMonth('created_at', $oct)->sum('amount');
-        $data['nov'] = SavingPay::where('user_id', $user->id)->whereStatus(1)->whereYear('created_at', $year)->whereLoanId($id)->whereMonth('created_at', $nov)->sum('amount');
-        $data['dec'] = SavingPay::where('user_id', $user->id)->whereStatus(1)->whereYear('created_at', $year)->whereLoanId($id)->whereMonth('created_at', $dec)->sum('amount');
+    //     $data['jan'] = SavingPay::where('user_id', $user->id)->whereStatus(1)->whereYear('created_at', $year)->whereLoanId($id)->whereMonth('created_at', $jan)->sum('amount');
+    //     $data['feb'] = SavingPay::where('user_id', $user->id)->whereStatus(1)->whereYear('created_at', $year)->whereLoanId($id)->whereMonth('created_at', $feb)->sum('amount');
+    //     $data['mar'] = SavingPay::where('user_id', $user->id)->whereStatus(1)->whereYear('created_at', $year)->whereLoanId($id)->whereMonth('created_at', $mar)->sum('amount');
+    //     $data['apr'] = SavingPay::where('user_id', $user->id)->whereStatus(1)->whereYear('created_at', $year)->whereLoanId($id)->whereMonth('created_at', $apr)->sum('amount');
+    //     $data['may'] = SavingPay::where('user_id', $user->id)->whereStatus(1)->whereYear('created_at', $year)->whereLoanId($id)->whereMonth('created_at', $may)->sum('amount');
+    //     $data['jun'] = SavingPay::where('user_id', $user->id)->whereStatus(1)->whereYear('created_at', $year)->whereLoanId($id)->whereMonth('created_at', $jun)->sum('amount');
+    //     $data['jul'] = SavingPay::where('user_id', $user->id)->whereStatus(1)->whereYear('created_at', $year)->whereLoanId($id)->whereMonth('created_at', $jul)->sum('amount');
+    //     $data['aug'] = SavingPay::where('user_id', $user->id)->whereStatus(1)->whereYear('created_at', $year)->whereLoanId($id)->whereMonth('created_at', $aug)->sum('amount');
+    //     $data['sep'] = SavingPay::where('user_id', $user->id)->whereStatus(1)->whereYear('created_at', $year)->whereLoanId($id)->whereMonth('created_at', $sep)->sum('amount');
+    //     $data['oct'] = SavingPay::where('user_id', $user->id)->whereStatus(1)->whereYear('created_at', $year)->whereLoanId($id)->whereMonth('created_at', $oct)->sum('amount');
+    //     $data['nov'] = SavingPay::where('user_id', $user->id)->whereStatus(1)->whereYear('created_at', $year)->whereLoanId($id)->whereMonth('created_at', $nov)->sum('amount');
+    //     $data['dec'] = SavingPay::where('user_id', $user->id)->whereStatus(1)->whereYear('created_at', $year)->whereLoanId($id)->whereMonth('created_at', $dec)->sum('amount');
 
 
-        $pay = SavingPay::where('user_id', $user->id)->whereLoanId($id)->get();
-        $sum = SavingPay::where('user_id', $user->id)->whereLoanId($id)->sum('amount');
-        $data['count'] = SavingPay::where('user_id', $user->id)->whereLoanId($id)->count();
-        return view($this->activeTemplate . 'user.fix_deposits.view', $data, compact('pageTitle', 'saved', 'pay', 'sum'));
-    }
+    //     $pay = SavingPay::where('user_id', $user->id)->whereLoanId($id)->get();
+    //     $sum = SavingPay::where('user_id', $user->id)->whereLoanId($id)->sum('amount');
+    //     $data['count'] = SavingPay::where('user_id', $user->id)->whereLoanId($id)->count();
+    //     return view($this->activeTemplate . 'user.fix_deposits.view', $data, compact('pageTitle', 'saved', 'pay', 'sum'));
+    // }
 
 }

@@ -5,7 +5,8 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\EmailLog;
 use App\Models\Transaction;
-use App\Models\Investment;
+use App\Models\Plan;
+use App\Models\FixDeposit;
 use App\Models\UserLogin;
 use Illuminate\Http\Request;
 
@@ -97,9 +98,10 @@ class ReportController extends Controller
 
     public function investLog(){
         $pageTitle = 'Investment Log';
-        $investments = Investment::latest()->paginate(getPaginate());
+        $investments = FixDeposit::latest()->paginate(getPaginate());
+        $plans = Plan::latest()->where('status', 1)->get();
         $emptyMessage = 'Data Not Found';
-        return view('admin.investment', compact('pageTitle', 'investments', 'emptyMessage'));
+        return view('admin.investment', compact('pageTitle', 'investments', 'plans', 'emptyMessage'));
     }
 
 

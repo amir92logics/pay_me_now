@@ -38,8 +38,8 @@
                 <div class="bs-stepper-content">
                     <div id="account-details" class="content" role="tabpanel" aria-labelledby="account-details-trigger">
                         <div class="content-header">
-                            <h5 class="mb-0">Deposit Plans</h5>
-                            <small class="text-muted">Please Select A Deposit Plan</small>
+                            <h5 class="mb-0">Interest Bearing Plans</h5>
+                            <small class="text-muted">Please Select A Plan</small>
                         </div>
                         <div class="row">
 
@@ -179,7 +179,7 @@
             document.getElementById("min").value = min_amount ? min_amount : '' ;
             document.getElementById("max").value = max_amount ? max_amount : '' ;
             document.getElementById("interest_type").value = interest_type ? interest_type == 0 ? 'Fixed' : 'Percent' : ''  ;
-            document.getElementById("interest_amount").value = interest_amount ? interest_amount : '' ;
+            document.getElementById("interest_amount").value = interest_amount ? (interest_amount + (interest_type == 0 ? ' USD' : ' %')) : '' ;
             document.getElementById("total_return").value = total_return ? total_return : '' ;
             document.getElementById("duration").value = duration ? duration + " Months"  : '' ;
 

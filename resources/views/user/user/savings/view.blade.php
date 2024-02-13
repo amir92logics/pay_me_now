@@ -92,10 +92,10 @@ $progress = $saved->paid / $saved->total * 100; @endphp
 
             </div>
             <div class="col-sm-6 col-12 d-flex justify-content-between flex-column text-end order-sm-2 order-1">
-              <div class="dropdown chart-dropdown">
+              <!-- <div class="dropdown chart-dropdown">
               @if($saved->type == 2)<button type="button"  data-bs-toggle="modal" data-bs-target="#inlineForm"  class="btn btn-primary">Fast Save</button> @endif
 
-              </div>
+              </div> -->
               <div id="avg-sessions-chart"></div>
             </div>
           </div>
