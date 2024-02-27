@@ -94,6 +94,13 @@
                             <small>Check toggle to credit and uncheck toggle to debit</small><br>
                             <small>Your Main Account Balance is {{showAmount(auth_user()->balance)}} {{__($general->cur_text)}}</small><br>
                         </div>
+                         <div class="form-group col-md-12">
+                            <label>@lang('Amount')<span class="text-danger">*</span></label>
+                            <div class="input-group has_append">
+                                <input type="text" name="amount" class="form-control" placeholder="@lang('Please provide positive amount')">
+
+                            </div>
+                        </div>
                        
                     </div>
                 </div>

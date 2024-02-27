@@ -265,7 +265,7 @@ public function trx(Request $request)
         $balance = auth_user()->balance;
         $general = GeneralSetting::first(['cur_text', 'cur_sym']);
         if ($request->boolean('act')) {
-            // dd('$type');
+            // dd('$type1');
 
             $trx = getTrx(6, 'SSAC');
             auth_user()->update([
@@ -291,8 +291,7 @@ public function trx(Request $request)
             //     'post_balance' => showAmount(auth_user()->balance),
             // ]);
         } else {
-            // dd('$type');
-
+            
             $trx = getTrx(6, 'SSAD');
             auth_user()->update([
                 'balance' => ($balance + $amount)
@@ -310,12 +309,14 @@ public function trx(Request $request)
             // $subAccount->update([
             //     'amount' => ($subAmount - $amount)
             // ]);
-            notify(auth_user(), 'BAL_SUB', [
-                'trx' => $trx,
-                'amount' => showAmount($amount),
-                'currency' => $general->cur_text,
-                'post_balance' => showAmount(auth_user()->balance)
-            ]);
+            // notify(auth_user(), 'BAL_SUB', [
+            //     'trx' => $trx,
+            //     'amount' => showAmount($amount),
+            //     'currency' => $general->cur_text,
+            //     'post_balance' => showAmount(auth_user()->balance)
+            // ]);
+            // dd('$type');
+
         }
         return ['success', $general->cur_sym . $amount . ' has been transfered'];
     });

@@ -38,6 +38,8 @@ class SubSavingAccountController extends Controller
 
     public function store(Request $request)
     {
+        // dd('dsfad');
+
         $accounts = SubSavingAccount::where('user_id', auth()->id())->count();
         $accountsLimit = config('subsavingaccounts.accounts_limit');
         if ($accounts >= $accountsLimit) {
@@ -46,10 +48,13 @@ class SubSavingAccountController extends Controller
             exit();
         }
         $balance = auth_user()->balance;
+        // dd($accounts, $accountsLimit, number_format($balance, 2) );
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
-            'amount' => ['nullable', 'numeric', 'max:' . number_format($balance, 2)],
+            'amount' => ['nullable'],
         ]);
+        // dd('dsfad');
+
         DB::transaction(function () use ($request, $balance) {
             $account = SubSavingAccount::create([
                 'name' => $request->input('name'),
@@ -165,12 +170,12 @@ class SubSavingAccountController extends Controller
                     'amount' => ($subAmount + $amount)
                 ]);
 
-                notify(auth_user(), 'BAL_ADD', [
-                    'trx' => $trx,
-                    'amount' => showAmount($amount),
-                    'currency' => $general->cur_text,
-                    'post_balance' => showAmount(auth_user()->balance),
-                ]);
+                // notify(auth_user(), 'BAL_ADD', [
+                //     'trx' => $trx,
+                //     'amount' => showAmount($amount),
+                //     'currency' => $general->cur_text,
+                //     'post_balance' => showAmount(auth_user()->balance),
+                // ]);
             } else {
                 $trx = getTrx(6, 'SSAD');
                 auth_user()->update([
@@ -188,12 +193,12 @@ class SubSavingAccountController extends Controller
                 $subAccount->update([
                     'amount' => ($subAmount - $amount)
                 ]);
-                notify(auth_user(), 'BAL_SUB', [
-                    'trx' => $trx,
-                    'amount' => showAmount($amount),
-                    'currency' => $general->cur_text,
-                    'post_balance' => showAmount(auth_user()->balance)
-                ]);
+                // notify(auth_user(), 'BAL_SUB', [
+                //     'trx' => $trx,
+                //     'amount' => showAmount($amount),
+                //     'currency' => $general->cur_text,
+                //     'post_balance' => showAmount(auth_user()->balance)
+                // ]);
             }
             return ['success', $general->cur_sym . $amount . ' has been transfered'];
         });

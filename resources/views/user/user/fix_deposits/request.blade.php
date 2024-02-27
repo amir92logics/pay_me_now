@@ -65,7 +65,7 @@
                                             data-duration="{{ $data->timer }}"
                                             data-interest_type="{{ $data->interest_type}}"
                                             data-interest_amount="{{ $data->interest_amount}}"
-                                            data-total_return="{{ $data->total_return}}"
+                                            {{-- data-total_return="{{ $data->total_return}}" --}}
                                             > {{ __($data->name) }}
                                         </option>
                                     @endforeach
@@ -104,11 +104,11 @@
                                         <input readonly type="text" name="interest_amount" id="interest_amount" class="form-control"
                                             placeholder="Interest Amount" />
                                     </div>
-                                     <div class="mb-1 form-password-toggle col-md-6">
+                                     {{-- <div class="mb-1 form-password-toggle col-md-6">
                                         <label class="form-label" for="total_return">Total Return</label>
                                         <input readonly type="text" name="total_return" id="total_return" class="form-control"
                                             placeholder="Total Return" />
-                                    </div>
+                                    </div> --}}
                                 </div>
                                 @push('script')
                                     <script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
@@ -172,15 +172,16 @@
             var max_amount = $("#first option:selected").attr('data-max_amount');
             var interest_type = $("#first option:selected").attr('data-interest_type');
             var interest_amount = $("#first option:selected").attr('data-interest_amount');
-            var total_return = $("#first option:selected").attr('data-total_return');
+            {{-- var total_return = $("#first option:selected").attr('data-total_return'); --}}
 
             document.getElementById("plan").value = plan_id ? plan_id : '' ;
             document.getElementById("name").value = name ? name : '' ;
             document.getElementById("min").value = min_amount ? min_amount : '' ;
             document.getElementById("max").value = max_amount ? max_amount : '' ;
-            document.getElementById("interest_type").value = interest_type ? interest_type == 0 ? 'Fixed' : 'Percent' : ''  ;
+            document.getElementById("interest_type").value = 'Percent';
+            {{-- document.getElementById("interest_type").value = interest_type ? interest_type == 0 ? 'Fixed' : 'Percent' : ''  ; --}}
             document.getElementById("interest_amount").value = interest_amount ? (interest_amount + (interest_type == 0 ? ' USD' : ' %')) : '' ;
-            document.getElementById("total_return").value = total_return ? total_return : '' ;
+            {{-- document.getElementById("total_return").value = total_return ? total_return : '' ; --}}
             document.getElementById("duration").value = duration ? duration + " Months"  : '' ;
 
             $.ajax({

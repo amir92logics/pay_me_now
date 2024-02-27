@@ -46,7 +46,6 @@ class PlanController extends Controller
         $plan->interest_amount = $request->interest;
         $plan->active = $request->status;
         $plan->status = $request->status;
-        dd($request);
         $plan->save();
 
         $notify[] = ['success', 'Plan created successfully'];

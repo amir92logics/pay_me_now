@@ -25,8 +25,8 @@
                                 </td>
 
 
-                                <td data-label="@lang('Days')">
-                                    {{ $data->time }} Days
+                                <td data-label="@lang('Months')">
+                                    {{ $data->time }} Months
                                 </td>
 
                                 <td data-label="@lang('Action')">
@@ -97,7 +97,7 @@
 
                         <div class="col-lg-12">
                             <div class="form-group mb-1">
-                                <label for="interest">@lang('Time') </label>
+                                <label for="interest">@lang('Months') </label>
                                 <div class="input-group">
                                     <input type="text" onkeyup="this.value = this.value.replace (/^\.|[^\d\.]/g, '')" name="timer" class="form-control" required>
 
@@ -153,7 +153,7 @@
 
                         <div class="col-lg-12">
                             <div class="form-group mb-1">
-                                <label for="edit_interest">@lang('Timer')</label>
+                                <label for="edit_interest">@lang('Months')</label>
                                 <div class="input-group">
                                     <input type="text" onkeyup="this.value = this.value.replace (/^\.|[^\d\.]/g, '')" name="timer" id="timer" class="form-control" required>
 

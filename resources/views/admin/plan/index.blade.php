@@ -12,7 +12,7 @@
                             <tr>
                                 <th>@lang('Name')</th>
                                 <th>@lang('Limit')</th>
-                                <th>@lang('Total Return')</th>
+                                {{-- <th>@lang('Total Return')</th> --}}
                                 <th>@lang('Interest Type')</th>
                                 <th>@lang('Status')</th>
                                 <th>@lang('Action')</th>
@@ -34,9 +34,9 @@
                                     </span>
                                 </td>
 
-                                <td data-label="@lang('Total Return')">
+                                {{-- <td data-label="@lang('Total Return')">
                                     {{ $data->total_return }} @lang('Times')
-                                </td>
+                                </td> --}}
 
                                 <td data-label="@lang('Interest Type')">
                                     @if($data->interest_type == 0)
@@ -149,7 +149,7 @@
                         </div>
 
 
-                        <div class="col-lg-6">
+                        {{-- <div class="col-lg-6">
                             <div class="form-group mb-1">
                                 <label for="total_return">@lang('How Many Return Times')</label>
                                 <div class="input-group">
@@ -157,7 +157,7 @@
 
                                 </div>
                             </div>
-                        </div>
+                        </div> --}}
                         <div class="col-lg-12">
                             <div class="form-group mb-1">
                                 <label for="interest_type">@lang('Interest Type')</label>
@@ -165,7 +165,7 @@
                                     <select name="interest_type" id="interest_type" required class="form-control">
                                         <option>@lang('Select An Option')</option>
                                         <option value="1">@lang('Percent')</option>
-                                        <option value="0">@lang('Fixed')</option>
+                                        {{-- <option value="0">@lang('Fixed')</option> --}}
                                     </select>
                                 </div>
                             </div>
@@ -241,7 +241,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-lg-12">
+                        {{-- <div class="col-lg-12">
                             <div class="form-group mb-1">
                                 <label for="edit_total_return">@lang('How Many Return Times')</label>
                                 <div class="input-group">
@@ -249,7 +249,7 @@
 
                                 </div>
                             </div>
-                        </div>
+                        </div> --}}
                         <div class="col-lg-12">
                             <div class="form-group mb-1">
                                 <label for="edit_interest_type">@lang('Interest Type')</label>
@@ -257,7 +257,7 @@
                                     <select name="interest_type" id="edit_interest_type" required class="form-control">
                                         <option>@lang('Select An Option')</option>
                                         <option value="1">@lang('Percent')</option>
-                                        <option value="0">@lang('Fixed')</option>
+                                        {{-- <option value="0">@lang('Fixed')</option> --}}
                                     </select>
                                 </div>
                             </div>
