@@ -253,7 +253,7 @@ public function trx(Request $request)
         'amount' => 'required|numeric|gt:0',
     ]);
     
-    if (($request->boolean('act') && $request->input('amount') > auth_user()->balance) || (!$request->boolean('act') && $request->input('amount') > $save->amount)) {
+    if ($request->input('amount') > auth_user()->balance) {
         $notify[] = ['error', 'You has insufficient balance.'];
         return back()->withNotify($notify);
     }
@@ -261,10 +261,9 @@ public function trx(Request $request)
     // dd($request, $save);
     $notify[] = DB::transaction(function () use ($request, $save) {
         $amount = $request->input('amount');
-        $subAmount = $save->amount;
         $balance = auth_user()->balance;
         $general = GeneralSetting::first(['cur_text', 'cur_sym']);
-        if ($request->boolean('act')) {
+        // if ($request->boolean('act')) {
             // dd('$type1');
 
             $trx = getTrx(6, 'SSAC');
@@ -290,36 +289,96 @@ public function trx(Request $request)
             //     'currency' => $general->cur_text,
             //     'post_balance' => showAmount(auth_user()->balance),
             // ]);
-        } else {
+        // } else {
             
-            $trx = getTrx(6, 'SSAD');
-            auth_user()->update([
-                'balance' => ($balance + $amount)
-            ]);
-            $save->balance -= $request->amount;
-            $save->save();
-            // $subAccount->log()->create([
-            //     'trx' => $trx,
-            //     'trx_type' => trx_type_int('debit'),
-            //     'details' => $request->input('details'),
-            //     'amount' => $amount,
-            //     'initial_balance' => $subAccount->amount,
-            // ]);
+        //     $trx = getTrx(6, 'SSAD');
+        //     auth_user()->update([
+        //         'balance' => ($balance + $amount)
+        //     ]);
+        //     $save->balance -= $request->amount;
+        //     $save->save();
+        //     // $subAccount->log()->create([
+        //     //     'trx' => $trx,
+        //     //     'trx_type' => trx_type_int('debit'),
+        //     //     'details' => $request->input('details'),
+        //     //     'amount' => $amount,
+        //     //     'initial_balance' => $subAccount->amount,
+        //     // ]);
 
-            // $subAccount->update([
-            //     'amount' => ($subAmount - $amount)
-            // ]);
-            // notify(auth_user(), 'BAL_SUB', [
-            //     'trx' => $trx,
-            //     'amount' => showAmount($amount),
-            //     'currency' => $general->cur_text,
-            //     'post_balance' => showAmount(auth_user()->balance)
-            // ]);
-            // dd('$type');
+        //     // $subAccount->update([
+        //     //     'amount' => ($subAmount - $amount)
+        //     // ]);
+        //     // notify(auth_user(), 'BAL_SUB', [
+        //     //     'trx' => $trx,
+        //     //     'amount' => showAmount($amount),
+        //     //     'currency' => $general->cur_text,
+        //     //     'post_balance' => showAmount(auth_user()->balance)
+        //     // ]);
+        //     // dd('$type');
 
-        }
+        // }
         return ['success', $general->cur_sym . $amount . ' has been transfered'];
     });
+    return back()->withNotify($notify);
+}
+public function trx1(Request $request)
+{
+    // dd($request->input('account'));
+    abort_if(is_null($request->input('account')), 401);
+
+    $save = Savings::where('user_id', auth()->id())->findOrFail($request->input('account'));
+    $user = auth()->user();
+
+    if ($save->mature < date("Y-m-d")) {
+        $notify[] = ['error', "Your target date is expired."];
+        return back()->withNotify($notify);
+    }
+    if ($save->status == 0) {
+        $notify[] = ['error', "Your Account is Disabled, First Enable it"];
+        return back()->withNotify($notify);
+    }
+    $request->validate([
+        'amount' => 'required|numeric|gt:0',
+    ]);
+    
+    if (($request->input('amount') > $save->amount)) {
+        $notify[] = ['error', 'You has insufficient balance.'];
+        return back()->withNotify($notify);
+    }
+
+    if ($user->balance >= $request->amount) {
+        $save->balance += $request->amount;
+        $save->save();
+
+
+        $user->balance -= $request->amount;
+        $user->save();
+
+        $code = getTrx();
+        $pay = new SavingPay();
+        $pay->user_id = $user->id;
+        $pay->loan_id = $save->reference;
+        $pay->plan_id = $save->type;
+        $pay->amount = $request->amount;
+        $pay->balance = $save->balance;
+        $pay->trx = $code;
+        $pay->status = 1;
+        $pay->save();
+
+        $transaction = new Transaction();
+        $transaction->user_id = $user->id;
+        $transaction->amount = $request->amount;
+        $transaction->post_balance = $user->balance;
+        $transaction->charge = 0;
+        $transaction->trx_type = '-';
+        $transaction->details = 'Fund Debited From Wallet To Service Ongoing Savings';
+        $transaction->trx = $code;
+        $transaction->save();
+
+        $notify[] = ['success', 'Payment Was Successful'];
+        return back()->withNotify($notify);
+    }
+    $notify[] = ['error', 'Sorry we cant process this payment at the moment.'];
     return back()->withNotify($notify);
 }
 }

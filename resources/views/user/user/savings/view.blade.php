@@ -52,8 +52,10 @@ $progress = $saved->paid / $saved->total * 100; @endphp
           <div class="row pb-50">
             <div class="col-sm-6 col-12 d-flex justify-content-between flex-column order-sm-1 order-2 mt-1 mt-sm-0">
               <div class="mb-1 mb-sm-0">
-              <h4 class="card-title mb-25">Savings Payment Chart</h4>
-                <p class="card-text mb-0">Total Savings: {{$general->cur_sym}} {{number_format($sum,2)}}</p>
+              {{-- <h4 class="card-title mb-25">Savings Payment Chart</h4>
+                <p class="card-text mb-0">Total Savings: {{$general->cur_sym}} {{number_format($sum,2)}}</p> --}}
+                 <h2 class="fw-bolder">{{$general->cur_sym}}{{number_format($saved->balance,2)}}</h2>
+                <p class="card-text fw-bold ">Current Balance</p>
                
               </div>
 
@@ -80,10 +82,18 @@ $progress = $saved->paid / $saved->total * 100; @endphp
       <div class="card">
         <div class="card-body">
           <div class="row pb-50">
+           <div class="col-sm-6 col-12 d-flex justify-content-between flex-column text-end order-sm-2 order-1">
+              <div class="dropdown chart-dropdown">
+              <button data-bs-toggle="modal" href="#trxModal1" onclick="openTrxModal1('{{$saved->id}}')" class="btn btn-md btn-success">Deposit</button>
+
+              </div>
+              <div id="avg-sessions-chart"></div>
+            </div>
             <div class="col-sm-6 col-12 d-flex justify-content-between flex-column order-sm-1 order-2 mt-1 mt-sm-0">
               <div class="mb-1 mb-sm-0">
-                <h2 class="fw-bolder mb-25">{{$general->cur_sym}}{{number_format($saved->balance,2)}}</h2>
-                <p class="card-text fw-bold mb-2">Current Balance</p>
+                {{-- <h2 class="fw-bolder mb-25">{{$general->cur_sym}}{{number_format($saved->balance,2)}}</h2>
+                <p class="card-text fw-bold mb-2">Current Balance</p> --}}
+                
                 <div class="font-medium-2">
                   <span class="text-success me-25">@if($saved->type == 1) Recurrent Savings @else Target Savings @endif</span>
 
@@ -171,7 +181,7 @@ $progress = $saved->paid / $saved->total * 100; @endphp
     <div class="col-lg-12 col-12">
       <div class="card card-company-table">
         <div class="card-body p-0">
-          <div class="table-responsive">
+          {{-- <div class="table-responsive">
             <table class="table">
               <thead>
                 <tr>
@@ -207,7 +217,7 @@ $progress = $saved->paid / $saved->total * 100; @endphp
                 @endforeach
               </tbody>
             </table>
-          </div>
+          </div> --}}
           @if(count($pay) < 1)
 <div class="demo-spacing-0">
             <div class="alert alert-danger" role="alert">
@@ -270,14 +280,54 @@ $progress = $saved->paid / $saved->total * 100; @endphp
                 <div class="modal-body">
                     <div class="form-row">
                         <div class="form-group col-md-12">
-                            <div class="form-check form-switch form-check-primary mb-1">
+                            {{-- <div class="form-check form-switch form-check-primary mb-1">
                                 <input type="checkbox" class="form-check-input" name="act" id="customSwitch10" checked />
                                 <label class="form-check-label" for="customSwitch10">
                                     <span class="switch-icon-left"><i data-feather="plus"></i></span>
                                     <span class="switch-icon-right"><i data-feather="minus"></i></span>
                                 </label>
+                            </div> --}}
+                            <small>Credit Amount</small><br>
+                            <small>Your Main Account Balance is {{showAmount(auth_user()->balance)}} {{__($general->cur_text)}}</small><br>
+                        </div>
+                        <div class="form-group col-md-12">
+                            <label>@lang('Amount')<span class="text-danger">*</span></label>
+                            <div class="input-group has_append">
+                                <input type="number" min="0.00" step="0.01" name="amount" class="form-control" placeholder="@lang('Please provide positive amount')">
                             </div>
-                            <small>Check toggle to credit and uncheck toggle to debit</small><br>
+                        </div>
+                    
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-warning" data-bs-dismiss="modal">@lang('Close')</button>
+                    <button type="submit" class="btn btn-success">@lang('Submit')</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<div id="trxModal1" class="modal fade" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">@lang('Transfer Balance')</h5>
+
+            </div>
+            <form action="{{route('user.saving.trx1')}}" method="POST">
+                @csrf
+                <input type="hidden" name="account" id="accountId1">
+                <div class="modal-body">
+                    <div class="form-row">
+                        <div class="form-group col-md-12">
+                            {{-- <div class="form-check form-switch form-check-primary mb-1">
+                                <input type="checkbox" class="form-check-input"  id="customSwitch10"  />
+                                <label class="form-check-label" for="customSwitch10">
+                                    <span class="switch-icon-left"><i data-feather="plus"></i></span>
+                                    <span class="switch-icon-right"><i data-feather="minus"></i></span>
+                                </label>
+                            </div> --}}
+                            <small>Debit Amount</small><br>
                             <small>Your Main Account Balance is {{showAmount(auth_user()->balance)}} {{__($general->cur_text)}}</small><br>
                         </div>
                         <div class="form-group col-md-12">
@@ -309,6 +359,9 @@ $(window).on("load",(function(){"use strict";var e,o,r,t,a,s,i,n,l,d,c,h,p="#5e5
 <script>
     function openTrxModal(accountId) {
         document.getElementById('accountId').value = accountId;
+    }
+    function openTrxModal1(accountId) {
+        document.getElementById('accountId1').value = accountId;
     }
 </script>
 @endpush
